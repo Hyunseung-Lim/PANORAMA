@@ -1,0 +1,116 @@
+{
+    "id": 40,
+    "abstract": "ABSTRACT OF THE DISCLOSURE A sensor apparatus for detecting leakage current in a post-type insulator of an electrical power system includes: a sensor unit having a housing, the sensor unit including: a sensor assembly operable to generate an analog signal proportional to a received leakage current; an electronics module operable to covert the analog signal to a digital value; and a communications system operable to wirelessly transmit the digital value to an external receiver; a collection band adapted to be connected to an exterior surface of the insulator; and a transfer lead interconnecting the sensor assembly and the collection band, the transfer lead operable to transfer leakage current from the insulator from the collection band to the sensor assembly.   -1 036/189U S Page 16-",
+    "initialClaims": [
+        "1. A sensor apparatus for detecting leakage current in a post-type insulator of an electrical power system, the apparatus comprising: a sensor unit having a housing, the sensor unit comprising: a sensor assembly operable to generate an analog signal proportional to a received leakage current; an electronics module operable to covert the analog signal to a digital value; and a communications system operable to wirelessly transmit the digital value to an external receiver; a collection band adapted to be connected to an exterior surface of the insulator; and a transfer lead interconnecting the sensor assembly and the collection band, the transfer lead operable to transfer leakage current from the insulator from the collection band to the sensor assembly.",
+        "2. The sensor apparatus of claim wherein the electronics module is operable to assign the digital value to one of a plurality of bins based on the magnitude of the digital value, wherein each of the plurality of bins represents a predetermined range of magnitudes of leakage current.",
+        "3. The sensor apparatus of claim wherein the electronics module is operable to detect a peak value of the analog signal at a first interval.",
+        "4. The sensor apparatus of claim 3 wherein the electronics module is operable to convert the peak value to the digital value.",
+        "5. The sensor apparatus of claim wherein the electronics module is operable to increment the assigned bin each time a digital value is assigned to a bin.",
+        "6. The sensor apparatus of claim wherein the sensor assembly comprises: a current transformer operably connected to the electronics module and having an opening therein; and an electrode having a first end electrically isolated from the housing and coupled to the transfer lead, and a second end electrically coupled to the housing, the electrode passing through the opening of the current transformer.",
+        "7. The sensor apparatus of claim wherein the sensor assembly comprises: a current transformer operably connected to the electronics module and having an opening therein; an electrode coupled to the transfer lead; and a ground lead having a first end electrically isolated from the housing and coupled to the transfer lead, and a second end electrically coupled to the housing, the ground lead passing through or in close proximity to the current transformer.",
+        "8. The sensor apparatus of claim 7 wherein the ground lead is formed in at least one wrap around the current transformer.",
+        "9. The sensor apparatus of claim wherein the sensor assembly comprises: a current transformer operably connected to the electronics module; an electrode having a first end electrically isolated from the housing and coupled to the transfer lead; a ground lead having a first end coupled to the electrode and a second end electrically coupled to the housing, the ground lead having a resistor of predetermined electrical resistance connected in-line therewith; and a voltage transducer operably connected to the electronics module, the voltage transducer connected to the ground lead upstream and downstream of the resistor, and being operable to measure a voltage drop across the resistor.",
+        "10. The sensor apparatus of claim wherein the sensor unit includes at least one magnetic switch disposed in the housing and operably connected to the electronics module to as to control at least one function of the electronics module.",
+        "11. . The sensor apparatus of claim wherein the housing encloses at least one battery electrically connected to power the electronics module.",
+        "12. A method of detecting leakage current in a post-type insulator of an electrical power system, the method comprising: conducting a leakage current from the insulator through a transfer lead to a sensor unit mounted in close proximity to the insulator, the sensor unit having a housing; using a sensor assembly of the sensor unit, generating an analog signal proportional to the leakage current; using an electronics module of the sensor unit, converting the analog signal to a digital value; and using a communications system of the sensor unit, wirelessly transmitting the digital value to an external receiver.",
+        "13. The method of claim 12 further comprising using the electronics module to assign the digital value to one of a plurality of bins based on the magnitude of the digital value, wherein each of the plurality of bins represents a predetermined range of magnitudes of leakage current.",
+        "14. The method of claim 13 further comprising incrementing the assigned bin each time a digital value is assigned to the a bin.",
+        "15. The method of claim 12 wherein further comprising using the electronics module to detect a peak value of the analog signal at a first interval.",
+        "16. The method of claim 15 further comprising using the electronics module to convert the peak value to the digital value.",
+        "17. The method of claim 15 further comprising: using the electronics module to assign the digital value to one of a plurality of bins based on the magnitude of the digital value, wherein each of the plurality of bins represents a predetermined range of magnitudes of leakage current, and wirelessly transmitting the digital value to an external receiver at a second interval.",
+        "18. The method of claim 17 wherein the second interval is shorter than the first interval."
+    ],
+    "finalClaims": [
+        "1. (Cancelled)",
+        "2. (Cancelled)",
+        "3. (Cancelled)",
+        "4. (Cancelled)",
+        "5. (Cancelled)",
+        "6. (Cancelled)",
+        "7. (Cancelled)",
+        "8. (Cancelled)",
+        "9. (Cancelled)",
+        "10. (Cancelled)",
+        "11. (Cancelled)",
+        "12. : A method of detecting leakage current in a post-type insulator of an electrical power system, the method comprising: conducting a leakage current from the insulator through a transfer lead to a sensor unit mounted in close proximity to the insulator, using a sensor assembly of the sensor unit, generating an analog signal proportional to the leakage current; using an analog peak detector circuit of an electronics module of the sensor unit to detect a scalar peak value of the analog signal occurring during a predetermined first time interval; using an analog to digital converter of the electronics module of the sensor unit, converting the scalar peak value of the analog signal from the analog circuit to a digital value; and using the electronics module to assign the digital value to one of a plurality of bins based on the magnitude of the digital value, wherein each of the plurality of bins represents a predetermined range of magnitudes of leakage current.",
+        "13. (Cancelled)",
+        "14. : The method of claim 12 further comprising incrementing a bin count of the assigned bin each time a digital value is assigned to the assigned bin.",
+        "15. (Cancelled)",
+        "16. (Cancelled)",
+        "17. : The method of claim 19 further comprising: wirelessly transmitting the bin counts to an external receiver at a predetermined second time interval.",
+        "18. : The method of claim 17 wherein the second time interval is shorter than the first time interval.",
+        "19. : The method of claim 14 further comprising using a communications system of the sensor unit, wirelessly transmitting the bin counts to an external receiver.",
+        "20. : The method of claim 14 further comprising: at the end of the first time interval, resetting the analog peak detect circuit, and repeating the steps of: conducting a leakage current; generating an analog signal; detecting a scalar peak value of the analog signal; converting the scalar peak value of the analog signal from the analog circuit to a digital value; and assigning the digital value to one of the plurality of bins.",
+        "21. : A method of detecting leakage current in an insulator of an electrical power system, the method comprising:",
+        "22. : The method of claim 21 further comprising incrementing a bin count of the assigned bin each time a digital value is assigned to the assigned bin.",
+        "23. : The method of claim 22 further comprising: wirelessly transmitting the bin count of each of the bins to an external receiver at a predetermined second time interval.",
+        "24. : The method of claim 24 wherein the second time interval is shorter than the first time interval.",
+        "25. : The method of claim 21 wherein the first time interval is 60 seconds."
+    ],
+    "CTNFDocumentIdentifier": "I0GLORNHPXXIFW4",
+    "CTNFBodyText": "The present application is being examined under the pre-AIA  first to invent provisions. \nDETAILED ACTION\nClaim Objections\nClaim 1 is objected to because of the following informalities:  The phrase \u201coperable to covert the analog signal in line 6 should be changed to - - operable to convert the analog signal - -.  Appropriate correction is required.\nClaim Rejections - 35 USC \u00a7 112\nThe following is a quotation of 35 U.S.C. 112(b):\n(b)  CONCLUSION.\u2014The specification shall conclude with one or more claims particularly pointing out and distinctly claiming the subject matter which the inventor or a joint inventor regards as the invention.\n\n\nThe following is a quotation of 35 U.S.C. 112 (pre-AIA ), second paragraph:\nThe specification shall conclude with one or more claims particularly pointing out and distinctly claiming the subject matter which the applicant regards as his invention.\n\n\nClaim 10 is rejected under 35 U.S.C. 112(b) or 35 U.S.C. 112 (pre-AIA ), second paragraph, as being indefinite for failing to particularly point out and distinctly claim the subject matter which the inventor or a joint inventor, or for pre-AIA  the applicant regards as the invention. Claim 10 recites the presence of a magnetic switch\u201d but no active permanent magnet, such as the core of a current transformer, has been claimed that may possibly change position to activate such a switch (see Meder made of record). Therefore, it is not clear how such a magnetic switch can be operably closed or opened once inside a closed housing of an electric power system. Appropriate correction is required.\n Claim Rejections - 35 USC \u00a7 103\nThe following is a quotation of pre-AIA  35 U.S.C. 103(a) which forms the basis for all obviousness rejections set forth in this Office action:\n(a) A patent may not be obtained though the invention is not identically disclosed or described as set forth in section 102 of this title, if the differences between the subject matter sought to be patented and the prior art are such that the subject matter as a whole would have been obvious at the time the invention was made to a person having ordinary skill in the art to which said subject matter pertains.  Patentability shall not be negatived by the manner in which the invention was made.\n\n\nClaims 1-5, 11-18 are rejected under pre-AIA  35 U.S.C. 103(a) as being unpatentable over Pylarinos in view of Kurihara.\nRegarding claims 1, 12, Pylarinos teaches a sensor apparatus and method for detecting leakage current in a post-type insulator of an electrical power system (abstract, p. 122), the apparatus and method comprising: a sensor unit having a housing (substation, p. 123), the sensor unit comprising: a sensor assembly operable to generate an analog signal proportional to a received leakage current (Hall sensor, p. 123) a collection band adapted to be connected to an exterior surface of the insulator (collection ring, p. 123) and a transfer lead interconnecting the sensor assembly and the collection band, the transfer lead operable to transfer leakage current from the insulator from the collection band to the sensor assembly (driven through sensor, p. 123).\nPylarinos implies that with a 2 kHz sampling rate and 960 data points for each waveform (p. 125) he also employs an electronics modules A/D converter and with the transmission to a central Data Acquisition System (p. 123) he employs a wireless transmission to an external receiver but neither feature is explicitly stated. \n \tKurihara from the same field of endeavor teaches an electronics module A/D converter board (p. 401) and a wireless transmission of data to an external receiver (wireless line, p. 402, col. 1 and Fig. 2).\nIt would have been obvious to one of ordinary skill in the art at the time the invention was made or filed to have Pylarinos include an A/D conversion for wireless transmission of data as taught by Kurihara for the benefit of high speed data transmission from a remote monitoring station as suggested by Kurihara (p. 402-403).\nRegarding claims 2, 13, Pylarinos teaches separating the leakage current data by magnitude and frequency (p. 125). As to the bins\u201d of leakage current ranges, this separation scheme by threshold current can be clearly seen in Pylarinos\u2019 Fig. 11 as claimed. \nRegarding claims 5, 14, the examiner takes Official Notice that incrementing a bin is a standard digital technique for assigning a record-keeping title to a datum in memory storage to one of ordinary skill.\nRegarding claims 3, 15, Pylarinos also teaches detecting a peak value of the analog signal at a first time interval (p. 126, Sec. 5).\nRegarding claims 4, 16, 17, Pylarinos teaches separating the leakage current data by predetermined magnitude (p. 124) and frequency (p. 125). As to the predetermined bins\u201d of leakage current ranges, this separation scheme by threshold current peak is seen in Pylarinos\u2019 Fig. 13-14 as claimed. \nRegarding claim 18, the teachings of Pylarinos are reviewed above.\n Pylarinos does not teach wirelessly transmitting data at a second interval where the second interval is shorter than the first interval.\n\tKurihara teaches converting the analog data to digital with an A/D converter (p.401). Kurihara further teaches an A/D converter board (p. 401) and a wireless transmission of data to an external receiver (wireless line, p. 402, col. 1 and Fig. 2).\nIt would have been obvious to one of ordinary skill in the art at the time the invention was made or filed to have Pylarinos include an A/D conversion for wireless transmission of data in a shorter interval as taught by Kurihara for the benefit of high speed data transmission from a remote monitoring station as suggested by Kurihara (p. 402-403).\nRegarding claim 11, the examiner takes Official Notice that a battery in a housing used in a primary (direct power source) or secondary (as battery backup) role for any electronics module is a standard policy in the electrical or electronics industry well known to one of ordinary skill for the benefit of ensuring continuous operation.\nClaim 10 is rejected under pre-AIA  35 U.S.C. 103(a) as being unpatentable over Pylarinos and Kurihara as applied to claims 1-5, 11-18 above, and further in view of  Meder Electronic.\nThe teachings of Pylarinos as modified by Kurihara (P-K) are reviewed above.\nP-K does not teach a magnetic switch disposed in a housing to control a function in an electronics module.\n Meder Electronic teaches how to operably control any functional module with a magnetic switch as long as a source of permanent magnetism is available, such as the open core of a current transformer (p. 28).\nIt would have been obvious to one of ordinary skill in the art at the time the invention was made or filed to have P-K include a magnetic switch as taught by Meder for the benefit of closing the contacts if a magnet is brought nearby, as suggested by Meder (p. 29).\n\nClaims 6-9 are rejected under pre-AIA  35 U.S.C. 103(a) as being unpatentable over Pylarinos and Kurihara as applied to claims 1-5, 11-18 above, and further in view of  ASEA.\nRegarding claims 6-8, the teachings of Pylarinos as modified by Kurihara (P-K) are reviewed above. \nP-K does not teach a current transformer operably connected to an electronics module with intended use of leads and electrodes connected to it.\nAsea from an analogous field of endeavor teaches the intended use of open-core current transformers with leads and electrode connections as well as a ground lead of a pre-determined resistance connected in-line therewith (earthing wire 2, p. 3) to a lead cover with ground wire and other leads passing through the opening of the current transformer (Fig. 3) as in claims 6, 7. Asea further teaches multiple turns of a wire lead around the current transformer (Fig. 3) which demonstrates capability of including a single turn for the ground wire if desired as in claim 8.\n It would have been obvious to one of ordinary skill in the art at the time the invention was made or filed to have P-K include a current transformer with leads and electrodes as well as a ground wire of predetermined resistance connected in-line therewith and leads, wires, and electrodes passing through the opening, as taught by Asea for the benefit of improved sensitivity for the sensed current magnitude as suggested by Asea (p. 3 and Fig. 4-8).\nRegarding claim 9, the teachings of Pylarinos as modified by Kurihara (P-K) are reviewed above. P-K further teaches a voltage transducer as in claim 9 which produces a voltage output from a sensed current (Pylarinos , Hall sensor, p. 123) with or without a resistor as is well known to one of ordinary skill. However, sensing a voltage across a very low resistance resistor for current monitoring is a well known standard operating procedure in the electronics industry (see Vishay made of record) and taught by P-K (Kurihara, Fig. 1).\n\nConclusion\nThe prior art made of record and not relied upon is considered pertinent to applicant's disclosure.   Srinivasrao, Sorqvist, OSKF, and Flex-Core teach outdoor insulators and transformers. Vishay teaches low resistance current sensing resistors. MetersUSA teaches operation of current transformers.\n",
+    "NOABodyText": "CNTA  13/728,484  NOA  78344  2858    07-03-fti AIA The present application is being examined under the pre-AIA first to invent provisions.  DETAILED ACTION  Response to Arguments  07-38-01 AIA Applicant\u2019s arguments, see appeal brief , filed 10/20/2017 , with respect to claims 12, 14, 17-25 have been fully considered and are persuasive.  The rejection of claims 12, 14, 17-25 has been withdrawn.   Allowable Subject Matter  12-151-07 AIA 07-97 12-51-07 Claim s 12, 14, 17-25 are allowed.   Conclusion  Any inquiry concerning this communication or earlier communications from the examiner should be directed to Demetrius Pretlow whose telephone number is (571)272-3441.  The examiner can normally be reached on Monday-Friday (8am -5pm).  Examiner interviews are available via telephone, in-person, and video conferencing using a USPTO supplied web-based collaboration tool. To schedule an interview, applicant is encouraged to use the USPTO Automated Interview Request (AIR) at http://www.uspto.gov/interviewpractice.  If attempts to reach the examiner by telephone are unsuccessful, the examiner\u2019s supervisor, PATRICK ASSOUAD can be reached on (571)272-2210.  The fax phone number for the organization where this application or proceeding is assigned is 571-273-8300.  Information regarding the status of an application may be obtained from the Patent Application Information Retrieval (PAIR) system.  Status information for published applications may be obtained from either Private PAIR or Public PAIR.  Status information for unpublished applications is available through Private PAIR only.  For more information about the PAIR system, see http://pair-direct.uspto.gov. Should you have questions on access to the Private PAIR system, contact the Electronic Business Center (EBC) at 866-217-9197 (toll-free). If you would like assistance from a USPTO Customer Service Representative or access to the automated information system, call 800-786-9199 (IN USA OR CANADA) or 571-272-1000.       /Demetrius Pretlow/  Examiner, Art Unit 2858       Application/Control Number:  13/728,484  Page 2    Art Unit:  2858",
+    "applicationNumber": "13728484",
+    "patentsCitedByExaminer": [],
+    "firstInventorToFileIndicator": "N",
+    "applicationStatusCode": 150,
+    "applicationTypeCode": "UTL",
+    "entityStatusData": {
+        "businessEntityStatusCategory": "Regular Undiscounted"
+    },
+    "filingDate": "2012-12-27",
+    "class/subclass": "324/509",
+    "nationalStageIndicator": false,
+    "firstInventorName": "Andrew John Phillips",
+    "cpcClassificationBag": [
+        "G01R31/1245",
+        "G01R15/14",
+        "G01R19/2513",
+        "G01R31/52"
+    ],
+    "effectiveFilingDate": "2012-12-27",
+    "publicationDateBag": [
+        "2013-07-04"
+    ],
+    "publicationSequenceNumberBag": [
+        "0169286"
+    ],
+    "earliestPublicationDate": "2013-07-04",
+    "applicationTypeLabelName": "Utility",
+    "applicationStatusDate": "2018-02-07",
+    "class": "324",
+    "applicationTypeCategory": "REGULAR",
+    "applicationStatusDescriptionText": "Patented Case",
+    "patentNumber": "9903899",
+    "grantDate": "2018-02-27",
+    "applicantBag": [
+        {
+            "applicantNameText": "ELECTRIC POWER RESEARCH INSTITUTE, INC.",
+            "correspondenceAddressBag": [
+                {
+                    "cityName": "Charlotte",
+                    "geographicRegionName": "NORTH CAROLINA",
+                    "geographicRegionCode": "NC",
+                    "countryCode": "US",
+                    "nameLineOneText": "ELECTRIC POWER RESEARCH INSTITUTE, INC.",
+                    "countryName": "UNITED STATES",
+                    "postalAddressCategory": "residence"
+                }
+            ]
+        }
+    ],
+    "firstApplicantName": "ELECTRIC POWER RESEARCH INSTITUTE, INC.",
+    "customerNumber": 68553,
+    "groupArtUnitNumber": "2858",
+    "earliestPublicationNumber": "US20130169286A1",
+    "inventionTitle": "LEAKAGE CURRENT SENSOR FOR POST TYPE INSULATOR",
+    "applicationConfirmationNumber": 8107,
+    "examinerNameText": "PRETLOW, DEMETRIUS R",
+    "subclass": "509",
+    "publicationCategoryBag": [
+        "Granted/Issued",
+        "Pre-Grant Publications - PGPub"
+    ],
+    "docketNumber": "1036/189US"
+}

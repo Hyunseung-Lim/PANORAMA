@@ -48,6 +48,7 @@ def fetch_ctnf_documents(from_date, to_date, start_Num):
     # 필요한 필드 추출
     ctnf_data = [
         {
+            "title": record["inventionTitle"][0],
             "applicationNumber": record["patentApplicationNumber"][0],
             "grantDate": record["sections.grantDate"],
             "techCenter": record["techCenter"][0],

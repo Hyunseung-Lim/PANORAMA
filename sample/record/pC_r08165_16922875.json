@@ -1,0 +1,94 @@
+{
+    "claims": [
+        {
+            "claimNumber": 1,
+            "parentClaim": -1,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 2,
+            "parentClaim": 1,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 3,
+            "parentClaim": 2,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 4,
+            "parentClaim": 1,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 5,
+            "parentClaim": 4,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 6,
+            "parentClaim": -1,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 7,
+            "parentClaim": 6,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 8,
+            "parentClaim": 7,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 9,
+            "parentClaim": -1,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 10,
+            "parentClaim": 9,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 11,
+            "parentClaim": 9,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 12,
+            "parentClaim": -1,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 13,
+            "parentClaim": -1,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 14,
+            "parentClaim": -1,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 15,
+            "parentClaim": -1,
+            "isReject": false,
+            "reasons": []
+        }
+    ]
+}

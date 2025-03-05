@@ -1,0 +1,117 @@
+{
+    "id": 8165,
+    "abstract": "ABSTRACT The present disclosure aims to provide a core node capable of appropriately allocating a radio resource of a RAN Slice allocated for a specific service to a radio terminal that uses this specific service. A core node (10) according to the present disclosure includes: a determination unit (14) configured to determine a radio resource to be allocated in accordance with a service provided for a radio terminal (30); and a communication unit (12) configured to transmit resource identification information indicating the radio resource determined in the determination unit (14) to a base station (20) that manages a plurality of radio resources for each RAN Slice associated with a service. 1 80584962v 1",
+    "initialClaims": [
+        "1. A core node comprising: determination means for determining a radio resource to be allocated in accordance with a service provided for a radio terminal; and communication means for transmitting resource identification information indicating the radio resource determined in the determination means to a base station that manages a plurality of radio resources for each RAN Slice associated with a service.",
+        "2. The core node according to Claim 1, wherein the determination means manages service identification information that indicates a service that the radio terminal uses and is uniquely identified in a mobile core network and the resource identification information in association with each other and acquires the service identification information from a management apparatus that manages terminal identification information of the radio terminal and the service identification information in association with each other.",
+        "3. The core node according to Claim 2, wherein the service identification information uniquely identified in the mobile core network is used as the resource identification information.",
+        "4. The core node according to any one of Claims 1 to 3, wherein the determination means determines whether there is a radio resource to be allocated to the radio terminal in a RAN Slice that provides a service that is used by the radio terminal based on a usage situation of a radio resource in the base station.",
+        "5. The core node according to Claim 4, wherein the communication means transmits a reject message indicating that it is impossible to allocate a radio resource to the radio terminal via the base station when it is determined in the determination means that there is no radio resource to be allocated to the radio terminal.",
+        "6. A base station comprising: a management unit configured to manage a plurality of radio resources for each RAN Slice associated with a service, communication means for receiv ing resource identification information that has been transmitted from a core node and indicates a radio resource to be allocated in accordance wx ith a service provided for a radio terminal- and resource allocation means for allocating the radio resource indicated by the resource identification information to the radio terminal.",
+        "7. The base station according to Claim 6. wherein the resource allocation means determines whether to allocate the radio resource indicated by the resource identification information to the radio terminal in accordance with a usage situation of a radio resource.",
+        "8. The base station according to Claim 7, further comprising communication means for transmitting a reject message indicating that it is impossible to allocate a radio resource to the radio terminal when it is determined that there is no radio resource to be allocated to the radio terminal in the resource allocation means.",
+        "9. A radio terminal comprising: reception means for receiving broadcast information items transmitted from a plurality of respectix e base stations; and determination means for determining that the radio terminal should be connected to a base station among the plurality of base stations that has transmitted broadcast information including RAN Slice identification information indicating a RAN Slice that provides a service that the radio terminal uses.",
+        "10. The radio terminal according to Claim 9, wherein the determination means determines, when there are a plurality of base stations that have transmitted broadcast information including RAN Slice identification information indicating a RAN Slice that provides a service to be used, a base station to which the radio terminal is connected based on radio field intensities of radio waves output from the respective base stations.",
+        "11. The radio terminal according to Claim 9 or 10, wherein the determination means determines, when the determination means has received a reject message indicating that it is impossible to allocate a radio resource from the base station, that the radio terminal should be connected to a base station other than the base station that has been determined, from among a plurality of base stations that have transmitted broadcast information including RAN Slice identification information indicating a RAN Slice that provides a service to be used.",
+        "12. A communication method comprising: determining a radio resource to be allocated in accordance with a service to be provided for a radio terminal; and transmitting resource identification information indicating the radio resource that has been determined to a base station that manages a plurality of radio resources for each RAN Slice associated with a service.",
+        "13. A radio resource allocation method comprising: managing a plurality of radio resources for each RAN Slice associated with a service; receiving resource identification information that has been transmitted from a core node and indicates a radio resource to be allocated in accordance with a service provided for a radio terminal; and allocating the radio resource indicated by the resource identification information to the radio terminal.",
+        "14. A base station selection method comprising: receiving broadcast information items transmitted from a plurality of respective base stations; and determining that a connection should be established with a base station among the plurality of base stations that has transmitted broadcast information including RAN Slice identification information indicating a RAN Slice that provides a service to be used.",
+        "15. A non-transitory computer readable medium storing a program for causing a computer to execute the following processing of: determining a radio resource to be allocated in accordance with a service to be provided for a radio terminal; and transmitting resource identification information indicating the radio resource that has been determined to a base station that manages a plurality of radio resources for each RAN Slice associated with a service."
+    ],
+    "finalClaims": [
+        "1. (Cancelled)",
+        "2. (Cancelled)",
+        "3. (Cancelled)",
+        "4. (Cancelled)",
+        "5. (Cancelled)",
+        "6. (Cancelled)",
+        "7. (Cancelled)",
+        "8. (Cancelled)",
+        "9. (Cancelled)",
+        "10. (Cancelled)",
+        "11. (Cancelled)",
+        "12. (Cancelled)",
+        "13. (Cancelled)",
+        "14. (Cancelled)",
+        "15. (Cancelled)",
+        "16. A mobility management node in a mobile communication system including a data management node, a UE (User Equipment), and a base station, the mobility management node comprising: at least one processor; and at least one memory coupled to the at least one processor, the at least one memory storing instructions that when executed by the at least one processor cause the at least one processor to: receive a request message from the UE via the base station, query the data management node to retrieve UE subscription information including a first ID related to slice information, determine a second ID related to the slice information based on the first ID, and send the second ID to the UE via the base station.",
+        "17. The mobility management node of claim [28]16, wherein the first ID identifies a service that the UE uses.",
+        "18. The mobility management node of claim [28]16, wherein the second ID is a resource ID to be allocated to the UE.",
+        "19. A method of a mobility management node in a mobile communication system including a data management node, a UE (User Equipment), and a base station, the method comprising: receiving a request message from the UE via the base station; querying the data management node to retrieve UE subscription information including a first ID related to slice information; determining a second ID related to the slice information based on the first ID; and sending the second ID to the UE via the base station.",
+        "20. The method of claim [31]19, wherein the first ID identifies a service that the UE uses.",
+        "21. The method of claim [31]19, wherein the second ID is a resource ID to be allocated to the UE.",
+        "22. A UE (User Equipment) in a mobile communication system including a data management node, a mobility management node, and a base station, the UE comprising: at least one processor; and at least one memory coupled to the at least one processor, the at least one memory storing instructions that when executed by the at least one processor cause the at least one processor to: send a request message to the mobility management node via the base station, the mobility management node querying the data management node to retrieve UE subscription information including a first ID related to slice information, and the mobility management node determining a second ID related to the slice information based on the first ID, and receive the second ID from the mobility management node via the base station.",
+        "23. The UE of claim [34]22, wherein the first ID identifies a service that the UE uses.",
+        "24. The UE of claim [34]22, wherein the second ID is a resource ID to be allocated to the UE.",
+        "25. A method of a UE (User Equipment) in a mobile communication system including a data management node, a mobility management node, and a base station, the method comprising: sending a request message to the mobility management node via the base station, the mobility management node querying the data management node to retrieve UE subscription information including a first ID related to slice information, and the mobility management node determining a second ID related to the slice information based on the first ID; and receiving the second ID from the mobility management node via the base station.",
+        "26. The method of claim [37]25, wherein the first ID identifies a service that the UE uses.",
+        "27. The method of claim [37]25, wherein the second ID is a resource ID to be allocated to the UE."
+    ],
+    "CTNFDocumentIdentifier": "KFR4Z98TDFLYX11",
+    "CTNFBodyText": "\n\n    Notice of Pre-AIA  or AIA  Status\nThe present application, filed on or after March 16, 2013, is being examined under the first inventor to file provisions of the AIA .\nCompact Prosecution\nAttempts have been made to reach Applicant\u2019s representative. Voice messages were left at inbox. No response has been received.\nClaim Rejections - 35 USC \u00a7 112\nThe following is a quotation of 35 U.S.C. 112(b):\n(b)  CONCLUSION.\u2014The specification shall conclude with one or more claims particularly pointing out and distinctly claiming the subject matter which the inventor or a joint inventor regards as the invention.\n\n\nThe following is a quotation of 35 U.S.C. 112 (pre-AIA ), second paragraph:\nThe specification shall conclude with one or more claims particularly pointing out and distinctly claiming the subject matter which the applicant regards as his invention.\n\n\nClaims 17, 18, 20, 21, 23, 24, 26, and 27 are rejected under 35 U.S.C. 112(b) or 35 U.S.C. 112 (pre-AIA ), second paragraph, as being incomplete for omitting essential elements, such omission amounting to a gap between the elements.  See MPEP \u00a7 2172.01.  The omitted elements are: The aforesaid claims depend from non-existing claims 28, 31, 34, and 37, respectively. \nAllowable Subject Matter\nClaims 16, 19, 22 and 25 are allowed.\nConclusion\nAny response to this Office Action should be faxed to (571) 273-8300 or mailed to:\nCommissioner for Patents\nP.O. Box 1450\n\t\tAlexandria, VA 22313-1450\nHand-delivered responses should be brought to \nCustomer Service Window\nRandolph Building\n401 Dulany Street\nAlexandria, VA 22314                                                                                                                                                                           \n",
+    "NOABodyText": "CNTA  16/922,875  NOA  82139     ALLOWABILITY NOTICE  Allowable Subject Matter  Claims 16-27 are pending for allowance.  13-03 AIA The following is an examiner\u2019s statement of reasons for allowance:  The prior art(s) of record discloses(s) subject matter common in scope to the present application, e.g., a mobility management node in a mobile communication system including a data management node, a UE (User Equipment), and a base station.  However, said prior art(s) fail(s) to disclose each and every detail of the claimed invention as specifically recited by at least independent claim(s) 16, 19, 22, and 25, particularly, receiving a request message from the UE via the base station, querying the data management node to retrieve UE subscription information including a first ID related to slice information, determining a second ID related to the slice information based on the first ID, and sending the second ID to the UE via the base station.  Further search did not reveal any reference by other that either alone or combined would anticipate or render obvious the present application\u2019s invention subject matter as recited by the aforesaid independent claims.  Claim(s) 17, 18, 20, 21, 23, 24, 26, and 27 are allowable by virtue of their dependency on claim(s) 16, 19, 22, and 25, respectively .  Any comments considered necessary by applicant must be submitted no later than the payment of the issue fee and, to avoid processing delays, should preferably accompany the issue fee.  Such submissions should be clearly labeled \u201cComments on Statement of Reasons for Allowance.\u201d    Pertinent Prior Art  The following references, although not relied upon, are considered to be pertinent prior art since they disclose subject matter related to the invention claimed by the present application, i.e., network slice in telecommunication systems.  US 20180359688 A1\t\tUS 20180332632 A1  Conclusion  Any response to this Office Action should be faxed to (571) 273-8300 or mailed to :  Commissioner for Patents  P.O. Box 1450  Alexandria, VA 22313-1450  Hand-delivered responses should be brought to  Customer Service Window  Randolph Building  401 Dulany Street  Alexandria, VA 22314  Any inquiry concerning this communication or earlier communications from the Examiner should be directed to Amancio Gonz\u00e1lez, whose telephone number is (571) 270-1106. The Examiner can normally be reached on Monday-Thursday from 8:00am to 5:00pm.  Examiner interviews are available via telephone, in-person, and video conferencing using a USPTO supplied web-based collaboration tool. To schedule an interview, Applicant is encouraged to use the USPTO Automated Interview Request (AIR) at http://www.uspto.gov/interviewpractice.  If attempts to reach the Examiner by telephone are unsuccessful, the Examiner\u2019s supervisor, Rafael Perez-Gutierrez, can be reached at (571) 272-7915. The fax phone number for the organization where this application or proceeding is assigned is (571) 273-8300.  Information regarding the status of an application may be obtained from the Patent Application Information Retrieval (PAIR) system. Status information for published applications may be obtained from either Private PAIR or Public PAIR. Status information for unpublished applications is available through Private PAIR only.  For more information about the PAIR system, see http://pair-direct.uspto.gov. Should you have questions on access to the Private PAIR system, contact the Electronic Business Center (EBC) at 866-217-9197 (toll-free) or 703-305-3028.  Any inquiry of a general nature or relating to the status of this application or proceeding should be directed to the receptionist/customer service whose telephone number is (571) 272-2600.   /AMANCIO GONZALEZ/  Primary Examiner, Art Unit 2642  December 18, 2020     Application/Control Number:  16/922,875\tPage 2    Art Unit:  2642      Application/Control Number:  16/922,875\tPage 3    Art Unit:  2642      Application/Control Number:  16/922,875\tPage 4    Art Unit:  2642",
+    "applicationNumber": "16922875",
+    "patentsCitedByExaminer": [],
+    "firstInventorToFileIndicator": "Y",
+    "applicationStatusCode": 150,
+    "applicationTypeCode": "UTL",
+    "entityStatusData": {
+        "smallEntityStatusIndicator": false,
+        "businessEntityStatusCategory": "Regular Undiscounted"
+    },
+    "filingDate": "2020-07-07",
+    "class/subclass": "455/433",
+    "nationalStageIndicator": false,
+    "firstInventorName": "Mayo OOHIRA",
+    "cpcClassificationBag": [
+        "H04W28/16",
+        "H04W8/06",
+        "H04W16/02",
+        "H04W48/18",
+        "H04W60/04",
+        "H04W72/04",
+        "H04W92/14"
+    ],
+    "effectiveFilingDate": "2020-07-07",
+    "publicationDateBag": [
+        "2020-10-22"
+    ],
+    "publicationSequenceNumberBag": [
+        "0336943"
+    ],
+    "earliestPublicationDate": "2020-10-22",
+    "applicationTypeLabelName": "Utility",
+    "applicationStatusDate": "2021-04-21",
+    "class": "455",
+    "applicationTypeCategory": "REGULAR",
+    "applicationStatusDescriptionText": "Patented Case",
+    "patentNumber": "11006321",
+    "grantDate": "2021-05-11",
+    "applicantBag": [
+        {
+            "applicantNameText": "NEC Corporation (c/o Hibiki IP Law Firm)",
+            "correspondenceAddressBag": [
+                {
+                    "cityName": "Tokyo",
+                    "countryCode": "JP",
+                    "nameLineOneText": "NEC Corporation (c/o Hibiki IP Law Firm)",
+                    "countryName": "JAPAN",
+                    "postalAddressCategory": "postal"
+                }
+            ]
+        }
+    ],
+    "firstApplicantName": "NEC Corporation (c/o Hibiki IP Law Firm)",
+    "customerNumber": 24395,
+    "groupArtUnitNumber": "2642",
+    "earliestPublicationNumber": "US20200336943A1",
+    "inventionTitle": "CORE NODE, BASE STATION, RADIO TERMINAL, COMMUNICATION METHOD, RADIO RESOURCE ALLOCATION METHOD, BASE STATION SELECTION METHOD, AND READABLE MEDIUM",
+    "applicationConfirmationNumber": 6259,
+    "examinerNameText": "GONZALEZ, AMANCIO",
+    "subclass": "433",
+    "publicationCategoryBag": [
+        "Granted/Issued",
+        "Pre-Grant Publications - PGPub"
+    ],
+    "docketNumber": "2209650.00307US3"
+}

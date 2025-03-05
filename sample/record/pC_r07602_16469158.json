@@ -1,0 +1,191 @@
+{
+    "claims": [
+        {
+            "claimNumber": 1,
+            "parentClaim": -1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 102,
+                    "citedPatents": [
+                        "9600035"
+                    ],
+                    "reason": "Regarding Claim 1, Park et al. discloses a foldable display device, comprising: an outer case (100) comprising at least a housing (100a, 100b); a middle frame (200) mounted to the outer case (100), wherein the middle frame (200) comprises at least two frame plates (201a, 201b) and a middle frame bending apparatus (600a, 600b) located between the frame plates (201a, 201b); a display panel (700) mounted to the middle frame (200), wherein the display panel (700) comprises a panel bending region (A1, A2) opposite to the middle frame bending apparatus; and a surface frame apparatus (800) mounted to the outer case (100) and comprising: at least a surface frame (800a, 800b), wherein an opening is disposed in the surface frame (800a, 800b), and the display panel (700) is engaged into the opening; a surface frame bending apparatus (folding portion of 800a, 800b) opposite to the middle frame bending apparatus (600a, 600b); wherein when the display panel (700) is in a bending state (figure 11), the middle frame bending apparatus (600a, 600b) and the surface frame bending apparatus (folding portion of 800a, 800b) form a first cavity, and the panel bending region (A1, A2) is bent into the first cavity; and wherein when the display panel (700) is in a non-bending state (figure 10), the surface frame bending apparatus (folding portion of 800a, 800b) causes the panel bending region (A1, A2) to be in a flattened state by supporting the middle frame bending apparatus (600a, 600b)."
+                }
+            ]
+        },
+        {
+            "claimNumber": 2,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 102,
+                    "citedPatents": [
+                        "9600035"
+                    ],
+                    "reason": "Regarding Claim 2, Park et al. discloses the foldable display device according to Claim 1, wherein the display panel (700) is a flexible display panel."
+                }
+            ]
+        },
+        {
+            "claimNumber": 3,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 102,
+                    "citedPatents": [
+                        "9600035"
+                    ],
+                    "reason": "Regarding Claim 3, Park et al. discloses the foldable display device according to Claim 1, wherein the outer case (100) is in a split type."
+                }
+            ]
+        },
+        {
+            "claimNumber": 4,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 102,
+                    "citedPatents": [
+                        "9600035"
+                    ],
+                    "reason": "Regarding Claim 4, Park et al. discloses the foldable display device according to Claim 1, wherein the display panel (700) comprises: a first region (700a) located at one side of the panel bending region (A1, A2) and a second region (700b) located at another side of the panel bending region (A1, A2), and wherein when the display panel (700) is in the bending state (figure 11), the first region (700a) is opposite to the second region (700b)."
+                }
+            ]
+        },
+        {
+            "claimNumber": 5,
+            "parentClaim": 4,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 102,
+                    "citedPatents": [
+                        "9600035"
+                    ],
+                    "reason": "Regarding Claim 5, Park et al. discloses the foldable display device according to Claim 4, wherein the outer case (100) comprises: a first housing (100a) opposite to the first region (700a); and a second housing (100b) opposite to the second region (700b), wherein the first housing (100a) and the second housing (100b) are connected with the surface frame by screw bolts (see for example column 7 lines 42-52)."
+                }
+            ]
+        },
+        {
+            "claimNumber": 6,
+            "parentClaim": 5,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 7,
+            "parentClaim": 6,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 8,
+            "parentClaim": 6,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 9,
+            "parentClaim": 8,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 10,
+            "parentClaim": 5,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 102,
+                    "citedPatents": [
+                        "9600035"
+                    ],
+                    "reason": "Regarding Claim 10, Park et al. discloses the foldable display device according to Claim 5, wherein shape and size of the first housing (100a) is the same with shape and size of the second housing (100b)."
+                }
+            ]
+        },
+        {
+            "claimNumber": 11,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 112,
+                    "citedPatents": [],
+                    "reason": "Regarding Claim 11, the first region in line 2. There is insufficient antecedent basis for this limitation in the claim. Claim 11 recites the limitation the second region in line 3. There is insufficient antecedent basis for this limitation in the claim."
+                }
+            ]
+        },
+        {
+            "claimNumber": 12,
+            "parentClaim": 1,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 13,
+            "parentClaim": 12,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 14,
+            "parentClaim": 13,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 15,
+            "parentClaim": 14,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 16,
+            "parentClaim": 12,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 17,
+            "parentClaim": 16,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 18,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 112,
+                    "citedPatents": [],
+                    "reason": "Regarding Claim 18, the frame plate in line 12. There is insufficient antecedent basis for this limitation in the claim."
+                },
+                {
+                    "sectionCode": 102,
+                    "citedPatents": [
+                        "9600035"
+                    ],
+                    "reason": "Regarding Claim 18, Park et al. discloses the foldable display device according to Claim 1, wherein the middle frame (200) further comprises a first frame plate (201a) and a second frame plate (201b) disposed at two sides of the middle frame bending apparatus (600a, 600b); wherein each of the first frame plate (201a) and the second frame plate (201b) is aligned with the housing (100), and each of the first frame plate (201a) and the second frame plate (201b) together with the housing (100) form a gap; wherein the middle frame bending apparatus (600a, 600b) comprises a first movable plate (600a) and a second movable plate (600b), wherein the first movable plate (600a) is rotatably mounted on the first surface frame (200a), and the second movable plate (600b) is rotatably mounted on the second surface frame (200b); wherein when the display panel (700) is in a non-bending state (figure 10), upper surfaces of the frame plate [112LAB, (which plate)], the first movable plate (600a), and the second movable plate (600b) are located in a same plane; and wherein when the display panel (700) is in a bending state (figure 11), the first movable plate (600a) and the second movable plate (600b) are moved into the first cavity."
+                }
+            ]
+        },
+        {
+            "claimNumber": 19,
+            "parentClaim": 1,
+            "isReject": false,
+            "reasons": []
+        },
+        {
+            "claimNumber": 20,
+            "parentClaim": 1,
+            "isReject": false,
+            "reasons": []
+        }
+    ]
+}

@@ -1,0 +1,283 @@
+{
+    "claims": [
+        {
+            "claimNumber": 1,
+            "parentClaim": -1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 1, Pylarinos teaches a sensor apparatus and method for detecting leakage current in a post-type insulator of an electrical power system (abstract, p. 122), the apparatus and method comprising: a sensor unit having a housing (substation, p. 123), the sensor unit comprising: a sensor assembly operable to generate an analog signal proportional to a received leakage current (Hall sensor, p. 123) a collection band adapted to be connected to an exterior surface of the insulator (collection ring, p. 123) and a transfer lead interconnecting the sensor assembly and the collection band, the transfer lead operable to transfer leakage current from the insulator from the collection band to the sensor assembly (driven through sensor, p. 123). Pylarinos implies that with a 2 kHz sampling rate and 960 data points for each waveform (p. 125) he also employs an electronics modules A/D converter and with the transmission to a central Data Acquisition System (p. 123) he employs a wireless transmission to an external receiver but neither feature is explicitly stated. Kurihara from the same field of endeavor teaches an electronics module A/D converter board (p. 401) and a wireless transmission of data to an external receiver (wireless line, p. 402, col. 1 and Fig. 2). It would have been obvious to one of ordinary skill in the art at the time the invention was made or filed to have Pylarinos include an A/D conversion for wireless transmission of data as taught by Kurihara for the benefit of high speed data transmission from a remote monitoring station as suggested by Kurihara (p. 402-403)."
+                }
+            ]
+        },
+        {
+            "claimNumber": 2,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 2, Pylarinos teaches separating the leakage current data by magnitude and frequency (p. 125). As to the bins of leakage current ranges, this separation scheme by threshold current can be clearly seen in Pylarinos’ Fig. 11 as claimed."
+                }
+            ]
+        },
+        {
+            "claimNumber": 3,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 3, Pylarinos also teaches detecting a peak value of the analog signal at a first time interval (p. 126, Sec. 5)."
+                }
+            ]
+        },
+        {
+            "claimNumber": 4,
+            "parentClaim": 3,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 4, Pylarinos teaches separating the leakage current data by predetermined magnitude (p. 124) and frequency (p. 125). As to the predetermined bins of leakage current ranges, this separation scheme by threshold current peak is seen in Pylarinos’ Fig. 13-14 as claimed."
+                }
+            ]
+        },
+        {
+            "claimNumber": 5,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 5, the examiner takes Official Notice that incrementing a bin is a standard digital technique for assigning a record-keeping title to a datum in memory storage to one of ordinary skill."
+                }
+            ]
+        },
+        {
+            "claimNumber": 6,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara",
+                        "ASEA"
+                    ],
+                    "reason": "Regarding Claim 6, the teachings of Pylarinos as modified by Kurihara (P-K) are reviewed above. P-K does not teach a current transformer operably connected to an electronics module with intended use of leads and electrodes connected to it. Asea from an analogous field of endeavor teaches the intended use of open-core current transformers with leads and electrode connections as well as a ground lead of a pre-determined resistance connected in-line therewith (earthing wire 2, p. 3) to a lead cover with ground wire and other leads passing through the opening of the current transformer (Fig. 3) as in claims 6, 7."
+                }
+            ]
+        },
+        {
+            "claimNumber": 7,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara",
+                        "ASEA"
+                    ],
+                    "reason": "Regarding Claim 7, Asea further teaches multiple turns of a wire lead around the current transformer (Fig. 3) which demonstrates capability of including a single turn for the ground wire if desired as in claim 8."
+                }
+            ]
+        },
+        {
+            "claimNumber": 8,
+            "parentClaim": 7,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara",
+                        "ASEA"
+                    ],
+                    "reason": "Regarding Claim 8, the teachings of Pylarinos as modified by Kurihara (P-K) are reviewed above. P-K does not teach a current transformer operably connected to an electronics module with intended use of leads and electrodes connected to it. Asea from an analogous field of endeavor teaches the intended use of open-core current transformers with leads and electrode connections as well as a ground lead of a pre-determined resistance connected in-line therewith (earthing wire 2, p. 3) to a lead cover with ground wire and other leads passing through the opening of the current transformer (Fig. 3) as in claims 6, 7."
+                }
+            ]
+        },
+        {
+            "claimNumber": 9,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 9, the teachings of Pylarinos as modified by Kurihara (P-K) are reviewed above. P-K further teaches a voltage transducer as in claim 9 which produces a voltage output from a sensed current (Pylarinos, Hall sensor, p. 123) with or without a resistor as is well known to one of ordinary skill. However, sensing a voltage across a very low resistance resistor for current monitoring is a well known standard operating procedure in the electronics industry (see Vishay made of record) and taught by P-K (Kurihara, Fig. 1)."
+                }
+            ]
+        },
+        {
+            "claimNumber": 10,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 112,
+                    "citedPatents": [],
+                    "reason": "Regarding Claim 10, Claim 10 recites the presence of a magnetic switch” but no active permanent magnet, such as the core of a current transformer, has been claimed that may possibly change position to activate such a switch (see Meder made of record). Therefore, it is not clear how such a magnetic switch can be operably closed or opened once inside a closed housing of an electric power system. Appropriate correction is required."
+                },
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara",
+                        "Meder Electronic"
+                    ],
+                    "reason": "Regarding Claim 10, the teachings of Pylarinos as modified by Kurihara (P-K) are reviewed above. P-K does not teach a magnetic switch disposed in a housing to control a function in an electronics module. Meder Electronic teaches how to operably control any functional module with a magnetic switch as long as a source of permanent magnetism is available, such as the open core of a current transformer (p. 28). It would have been obvious to one of ordinary skill in the art at the time the invention was made or filed to have P-K include a magnetic switch as taught by Meder for the benefit of closing the contacts if a magnet is brought nearby, as suggested by Meder (p. 29)."
+                }
+            ]
+        },
+        {
+            "claimNumber": 11,
+            "parentClaim": 1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 11, the examiner takes Official Notice that a battery in a housing used in a primary (direct power source) or secondary (as battery backup) role for any electronics module is a standard policy in the electrical or electronics industry well known to one of ordinary skill for the benefit of ensuring continuous operation."
+                }
+            ]
+        },
+        {
+            "claimNumber": 12,
+            "parentClaim": -1,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 12, Pylarinos teaches a sensor apparatus and method for detecting leakage current in a post-type insulator of an electrical power system (abstract, p. 122), the apparatus and method comprising: a sensor unit having a housing (substation, p. 123), the sensor unit comprising: a sensor assembly operable to generate an analog signal proportional to a received leakage current (Hall sensor, p. 123) a collection band adapted to be connected to an exterior surface of the insulator (collection ring, p. 123) and a transfer lead interconnecting the sensor assembly and the collection band, the transfer lead operable to transfer leakage current from the insulator from the collection band to the sensor assembly (driven through sensor, p. 123). Pylarinos implies that with a 2 kHz sampling rate and 960 data points for each waveform (p. 125) he also employs an electronics modules A/D converter and with the transmission to a central Data Acquisition System (p. 123) he employs a wireless transmission to an external receiver but neither feature is explicitly stated. Kurihara from the same field of endeavor teaches an electronics module A/D converter board (p. 401) and a wireless transmission of data to an external receiver (wireless line, p. 402, col. 1 and Fig. 2). It would have been obvious to one of ordinary skill in the art at the time the invention was made or filed to have Pylarinos include an A/D conversion for wireless transmission of data as taught by Kurihara for the benefit of high speed data transmission from a remote monitoring station as suggested by Kurihara (p. 402-403)."
+                }
+            ]
+        },
+        {
+            "claimNumber": 13,
+            "parentClaim": 12,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 13, Pylarinos teaches separating the leakage current data by magnitude and frequency (p. 125). As to the bins of leakage current ranges, this separation scheme by threshold current can be clearly seen in Pylarinos’ Fig. 11 as claimed."
+                }
+            ]
+        },
+        {
+            "claimNumber": 14,
+            "parentClaim": 13,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 14, the examiner takes Official Notice that incrementing a bin is a standard digital technique for assigning a record-keeping title to a datum in memory storage to one of ordinary skill."
+                }
+            ]
+        },
+        {
+            "claimNumber": 15,
+            "parentClaim": 12,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 15, Pylarinos also teaches detecting a peak value of the analog signal at a first time interval (p. 126, Sec. 5)."
+                }
+            ]
+        },
+        {
+            "claimNumber": 16,
+            "parentClaim": 15,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 16, Pylarinos teaches separating the leakage current data by predetermined magnitude (p. 124) and frequency (p. 125). As to the predetermined bins of leakage current ranges, this separation scheme by threshold current peak is seen in Pylarinos’ Fig. 13-14 as claimed."
+                }
+            ]
+        },
+        {
+            "claimNumber": 17,
+            "parentClaim": 15,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 17, Pylarinos teaches separating the leakage current data by predetermined magnitude (p. 124) and frequency (p. 125). As to the predetermined bins of leakage current ranges, this separation scheme by threshold current peak is seen in Pylarinos’ Fig. 13-14 as claimed."
+                }
+            ]
+        },
+        {
+            "claimNumber": 18,
+            "parentClaim": 17,
+            "isReject": true,
+            "reasons": [
+                {
+                    "sectionCode": 103,
+                    "citedPatents": [
+                        "Pylarinos",
+                        "Kurihara"
+                    ],
+                    "reason": "Regarding Claim 18, Pylarinos does not teach wirelessly transmitting data at a second interval where the second interval is shorter than the first interval. Kurihara teaches converting the analog data to digital with an A/D converter (p.401). Kurihara further teaches an A/D converter board (p. 401) and a wireless transmission of data to an external receiver (wireless line, p. 402, col. 1 and Fig. 2). It would have been obvious to one of ordinary skill in the art at the time the invention was made or filed to have Pylarinos include an A/D conversion for wireless transmission of data in a shorter interval as taught by Kurihara for the benefit of high speed data transmission from a remote monitoring station as suggested by Kurihara (p. 402-403)."
+                }
+            ]
+        }
+    ]
+}
