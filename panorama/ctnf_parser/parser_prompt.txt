@@ -89,7 +89,7 @@ For citedPatents:
   * If no patent/publication number is found but the reference is clearly cited, omit that citation.
 - Return as array of strings in standardized format:
   * Include the country code (e.g., "JP 2015-123456").
-  * US patent applications: "US" + space + 8-digit number (e.g., "US 20150048242")
+  * US patent applications: "US" + space + 11-digit number (e.g., "US 20150048242")
   * US patents: "US" + space + 7 or 8-digit number (e.g., "US 9495285")
   * Return an empty array [] if no citations are found.
 

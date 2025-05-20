@@ -3,7 +3,7 @@ from langchain.schema import HumanMessage
 import json
 import os
 
-os.environ["OPENAI_API_KEY"] = ""
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 chat = ChatOpenAI(model="gpt-4o")
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -19,15 +19,14 @@ def load_prompt():
         with open(PROMPT_PATH, "r", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
-        raise FileNotFoundError(f"프롬프트 파일을 찾을 수 없습니다: {PROMPT_PATH}")
+        raise FileNotFoundError(f"Prompt file not found: {PROMPT_PATH}")
 
 question = load_prompt()
 
 def main(start_num: int, end_num: int):
     for i in range(start_num, end_num + 1):
-        formatted_num = f"{i:05d}"  # 5자리 숫자로 포맷팅 (00001, 00002, ...)
+        formatted_num = f"{i:05d}"
         
-        # rec_r00001_로 시작하는 파일 찾기
         target_file = None
         for file_name in os.listdir(input_folder):
             if file_name.startswith(f"rec_r{formatted_num}_") and file_name.endswith(".json"):
@@ -39,7 +38,6 @@ def main(start_num: int, end_num: int):
             continue
 
         file_path = os.path.join(input_folder, target_file)
-        # JSON 읽기
         with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
 
@@ -52,10 +50,9 @@ def main(start_num: int, end_num: int):
         # Save the response to a JSON file
         response_content = response.content.strip()
         if response_content.startswith("```json") and response_content.endswith("```"):
-            # ```json과 ```를 제거하고 중간의 JSON만 추출
+            # remove ```json and ```
             json_content = response_content[7:-3].strip()
         else:
-            # ```json ``` 형식이 아니라면 그대로 사용
             json_content = response_content
 
         try:
@@ -67,12 +64,11 @@ def main(start_num: int, end_num: int):
         output_file_name = f"pC_r{formatted_num}_{application_number}.json"
         output_path = os.path.join(output_folder, output_file_name)
 
-        # JSON 저장
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
 
         print(f"Response saved to {output_file_name}")
 
-start_num = 7  # 시작 번호
-end_num = 25   # 끝 번호
+start_num = 1
+end_num = 100
 main(start_num, end_num)
