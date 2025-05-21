@@ -1,12 +1,15 @@
 import os
 import json
 import requests
-from patent_client import PublishedApplication, Patent
+from patent_client._sync.uspto.odp.api import ODPApi
 import xml.etree.ElementTree as ET
 from datetime import datetime
 from utils import extract_claims, validate_claims
 import time
 import re
+
+odp_api = ODPApi()
+odp_api.base_url = 'https://api.uspto.gov'
 
 USPTO_API_KEY = os.getenv("USPTO_API_KEY")
 
@@ -18,12 +21,15 @@ spec_text_dir = "./data/spec_app/text"
 spec_image_dir = "./data/spec_app/image"
 cited_spec_text_dir = "./data/spec_cited/text"
 cited_spec_image_dir = "./data/spec_cited/image"
+error_log_dir = "./data/error_report"
 
 os.makedirs(output_dir, exist_ok=True)
 os.makedirs(spec_text_dir, exist_ok=True)
 os.makedirs(spec_image_dir, exist_ok=True)
 os.makedirs(cited_spec_text_dir, exist_ok=True)
 os.makedirs(cited_spec_image_dir, exist_ok=True)
+os.makedirs(error_log_dir, exist_ok=True)
+
 
 def fetch_ctnf_documents(from_date, to_date, start_Num):
     print("Fetching CTNF documents...")
@@ -36,7 +42,7 @@ def fetch_ctnf_documents(from_date, to_date, start_Num):
     data = {
         "criteria": criteria,
         "start": start_Num,
-        "rows": 100
+        "rows": 10
     }
     response = requests.post(url, headers=headers, data=data)
     data = response.json()
@@ -63,11 +69,13 @@ def fetch_grant_document(identifier):
 
     try:
         if publication_pattern.match(trimed_idendtifier):
+            # XXXX/XXXXXXX
             print(f"Fetching grant document for publication number {trimed_idendtifier}...")
-            patent = PublishedApplication.objects.get(trimed_idendtifier)
+            patent = odp_api.get_documents(trimed_idendtifier)
         elif application_pattern.match(trimed_idendtifier):
+            # XXXXXXX
             print(f"Fetching grant document for application number {trimed_idendtifier}...")
-            patent = Patent.objects.get(trimed_idendtifier)
+            patent = odp_api.get_documents(trimed_idendtifier)
         else:
             raise ValueError(f"Invalid identifier format. Please provide a valid application or publication number. input: {identifier}")
         
@@ -162,7 +170,7 @@ def fetch_rejected_claims(document_identifier, application_number, documents):
         print("Error: XML download URL not found.")
         raise ValueError("XML download URL not found.")
 
-    headers = {"X-API-KEY": os.getenv("USPTO_API_KEY")}
+    headers = {"X-API-KEY": USPTO_API_KEY}
     xml_response = requests.get(xml_download_url, headers=headers)
     xml_response.raise_for_status()
     content = xml_response.content
@@ -215,7 +223,7 @@ def get_document_content(app_documents, document_code, target_document_identifie
                     None
                 )
                 if download_url:
-                    headers = {"X-API-KEY": os.getenv("USPTO_API_KEY")}
+                    headers = {"X-API-KEY": USPTO_API_KEY}
                     response = requests.get(download_url, headers=headers)
                     response.raise_for_status()
                     print(f"Retrieved NOA document.")
@@ -242,7 +250,7 @@ def get_document_content(app_documents, document_code, target_document_identifie
             print(f"Error: {mimeTypeIdentifier} download URL not found.")
         return ""
 
-    headers = {"X-API-KEY": os.getenv("USPTO_API_KEY")}
+    headers = {"X-API-KEY": USPTO_API_KEY}
     response = requests.get(download_url, headers=headers)
     response.raise_for_status()
     content = response.content
@@ -274,9 +282,9 @@ def parse_xml(content):
     return document_text
 
 def get_application_documents(app_number):
-    base_url = f"https://beta-api.uspto.gov/api/v1/patent/applications/{app_number}/documents"
+    base_url = f"https://api.uspto.gov/api/v1/patent/applications/{app_number}/documents"
     headers = {
-        "X-API-KEY": os.getenv("USPTO_API_KEY")
+        "X-API-KEY": USPTO_API_KEY
     }
 
     response = requests.get(base_url, headers=headers)
@@ -330,7 +338,7 @@ def main(from_date, to_date):
     
     final_data = []    
     
-    error_log_path = f"./data/error_report/error_rec_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv"
+    error_log_path = f"{error_log_dir}/error_rec_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv"
     
     if not os.path.exists(error_log_path):
         with open(error_log_path, "w") as f:
@@ -427,8 +435,8 @@ def main(from_date, to_date):
                     log_error()
                     continue
 
-                metadata_url = f"https://beta-api.uspto.gov/api/v1/patent/applications/{app_number}/meta-data"
-                metadata_response = requests.get(metadata_url, headers={"X-API-KEY": os.getenv("USPTO_API_KEY")})
+                metadata_url = f"https://api.uspto.gov/api/v1/patent/applications/{app_number}/meta-data"
+                metadata_response = requests.get(metadata_url, headers={"X-API-KEY": USPTO_API_KEY})
                 metadata_response.raise_for_status()
                 metadata = {k: v for k, v in metadata_response.json()["patentFileWrapperDataBag"][0]["applicationMetaData"].items() if k != "inventorBag"}
                 print(f"Metadata retrieved for application {app_number}.")
@@ -539,7 +547,7 @@ def main(from_date, to_date):
                 print(f"Resetting start_Num from {start_Num} to 0")
                 start_Num = 0
                 
-                error_log_path = f"./data/error_report/error_rec_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv"
+                error_log_path = f"{error_log_dir}/error_rec_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv"
                 
                 with open(error_log_path, "w") as f:
                     f.write("pre_num,rec_num,app_num,error_code,error_message,timestamp\n")

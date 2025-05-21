@@ -257,5 +257,5 @@ def add_paragraph_num():
     print(f"Completed. Total files: {len(json_files)}, Success: {success_count}, Failed: {len(json_files) - success_count}")
 
 if __name__ == "__main__":
-    # validate_and_copy_ctnf()
+    validate_and_copy_ctnf()
     add_paragraph_num()

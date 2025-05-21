@@ -169,7 +169,7 @@ def process_files():
             continue
 
         rec_filename = f"rec_r{id_number}_{appl_number}.json"
-        rec_file_path = os.path.join('data/record_with_title', rec_filename)
+        rec_file_path = os.path.join('data/record', rec_filename)
 
         if not os.path.exists(rec_file_path):
             logger.warning(f"Corresponding rec file not found: {rec_filename}")
