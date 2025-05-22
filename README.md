@@ -75,19 +75,19 @@ Convert the PANORAMA dataset to specific benchmark formats:
 **NOC4PC** (Novelty and Obviousness Characterization):
 
 ```bash
-python convert2bench_noc4pc.py --base_data_dir [path/to/data]
+python panorama/convert2bench_noc4pc.py
 ```
 
 **PAR4PC** (Prior Art Retrieval):
 
 ```bash
-python convert2bench_par4pc.py --base_data_dir [path/to/data]
+python panorama/convert2bench_par4pc.py
 ```
 
 **PI4PC** (Patentability Identification):
 
 ```bash
-python convert2bench_pi4pc.py --base_data_dir [path/to/data]
+python panorama/convert2bench_pi4pc.py
 ```
 
 ## 📜 License
