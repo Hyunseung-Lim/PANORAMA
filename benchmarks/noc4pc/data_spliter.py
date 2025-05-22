@@ -1,4 +1,4 @@
-# python test_rejection/data_spliter.py --input_dir data/rejection --output_base_dir data/rejection_splited --ratios 90:5:5
+# python benchmarks/noc4pc/data_spliter.py --input_dir  --output_base_dir data/record_splited --ratios 90:5:5
 
 import os
 import re

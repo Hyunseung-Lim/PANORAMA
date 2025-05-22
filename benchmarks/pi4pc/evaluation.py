@@ -1,5 +1,4 @@
-# python pi4pc/result_evaluation.py <path_to_evaluation_results.csv>
-# python pi4pc/result_evaluation.py pi4pc/result/evaluation_results.csv
+# python benchmarks/pi4pc/evaluation.py <path_to_evaluation_results.csv>
 
 import pandas as pd
 import argparse

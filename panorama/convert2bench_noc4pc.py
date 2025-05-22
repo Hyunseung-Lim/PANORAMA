@@ -1,3 +1,5 @@
+# python PANORAMA/convert2bench_noc4pc.py
+
 import json
 import re
 from pathlib import Path
@@ -486,11 +488,11 @@ if __name__ == "__main__":
              sys.exit(1)
 
         record_input_dir = base_data_dir / 'record'
-        pc_input_dir = base_data_dir / 'parsed_CTNF'
+        pc_input_dir = base_data_dir / 'parsed_CTNF_with_PN'
         spec_input_dir = base_data_dir / 'spec_cited' / 'text' / 'parsed'
-        output_jsonl_file = base_data_dir / 'noc4pc_benchmark.jsonl'
-        output_parquet_file = base_data_dir / 'noc4pc_benchmark.parquet'
-        individual_json_output_dir = base_data_dir / 'noc4pc' # New dir for individual files
+        output_jsonl_file = base_data_dir / 'benchmarks' / 'noc4pc_benchmark.jsonl'
+        output_parquet_file = base_data_dir / 'benchmarks' / 'noc4pc_benchmark.parquet'
+        individual_json_output_dir = base_data_dir / 'benchmarks' / 'noc4pc' # New dir for individual files
         error_report_dir = base_data_dir / 'error_report' # Reusing error report dir
 
         create_rejection_benchmark(

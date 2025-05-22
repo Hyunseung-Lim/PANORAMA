@@ -1,4 +1,5 @@
-# python test_citedPatent/result_evaluation.py test_citedPatent\result\result_20250413_150437_anthropic_claude-3-7-sonnet-20250219_test\evaluation_results.csv
+# python benchmarks/par4pc/evaluation.py <path_to_evaluation_results.csv>
+
 import pandas as pd
 import argparse
 from ast import literal_eval

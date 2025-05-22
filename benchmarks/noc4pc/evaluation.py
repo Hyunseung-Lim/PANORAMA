@@ -1,11 +1,4 @@
-# pip install sentence-transformers rouge-score bert-score torch transformers scikit-learn pandas
-'''
-pip install --upgrade pip
-git clone https://github.com/google-research/bleurt.git
-cd bleurt
-pip install .
-'''
-# python test_rejection/result_evaluation.py test_rejection/result/result_YYYYMMDD_HHMMSS_provider_model_rejection/evaluation_results.csv
+# python benchmarks/noc4pc/evaluation.py <path_to_evaluation_results.csv>
 
 import pandas as pd
 import argparse

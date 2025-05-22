@@ -586,11 +586,11 @@ if __name__ == "__main__":
     paragraph_input_dir = base_data_dir / 'parsed_CTNF_with_PN'
     spec_input_dir = base_data_dir / 'spec_cited' / 'text' / 'parsed'
     record_input_dir = base_data_dir / 'record_with_title'
-    output_individual_pi4pc_dir = base_data_dir / 'pi4pc_cited_paragraph'
+    output_individual_pi4pc_dir = base_data_dir / 'pi4pc'
     error_report_dir = base_data_dir / 'error_report'
 
-    output_jsonl_file = base_data_dir / "pi4pc_benchmark.jsonl"
-    output_parquet_file = base_data_dir / "pi4pc_benchmark.parquet"
+    output_jsonl_file = base_data_dir / "pi4pc" / "pi4pc_benchmark.jsonl"
+    output_parquet_file = base_data_dir / "pi4pc" / "pi4pc_benchmark.parquet"
 
     create_cited_paragraph_pi4pc(
         paragraph_dir=paragraph_input_dir,

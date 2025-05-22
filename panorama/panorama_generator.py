@@ -1,12 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # python -m pip install tqdm pandas pyarrow
-"""
-This script pairs pC files from the parsed_CTNF_with_PN folder
-with rec files from the record_with_title folder
-to generate panorama JSON files in the panorama folder.
-Afterward, it converts all files to JSONL and Parquet formats.
-"""
 
 import os
 import json
@@ -150,7 +144,7 @@ def process_files():
     Returns:
         dict: Dictionary containing processing statistics.
     """
-    pc_files = glob.glob('data/parsed_CTNF_with_PN/pC_*.json')
+    pc_files = glob.glob('data/parsed_CTNF/pC_*.json')
     total_pc_files = len(pc_files)
     logger.info(f"Number of pC files found: {total_pc_files}")
     

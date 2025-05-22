@@ -134,20 +134,21 @@ def get_gold_silver_ids(ctnf_data, target_claim_number):
     return list(gold_ids), list(silver_pool)
 
 def find_negative_candidates_pool(current_index, target_class, current_filing_date,
-                                  valid_records, record_dir, pc_dir, exclude_ids, target_pool_size=50):
+                                  all_record_files, record_dir, pc_dir, exclude_ids, target_pool_size=50):
     negative_pool = set()
     processed_app_ids = set()
     neg_id_to_source_record_data = {}
 
+    current_record_info = all_record_files[current_index]
+    current_app_num = current_record_info["app_num"]
     current_filing_dt = parse_date(current_filing_date)
-    current_app_num = valid_records[current_index]['app_num']
 
     print(f"  [Neg Pool Search] Starting: App={current_app_num}, Target Class={target_class}, Target Date < {current_filing_dt.date() if current_filing_dt else 'N/A'}, Target Pool Size={target_pool_size}")
     if not current_filing_dt:
          print("    [Neg Pool Search] Warning: Current filingDate is invalid. Cannot proceed with Filing Date comparison. Pool creation is not possible.")
          return [], {}
 
-    forward_range = range(current_index + 1, len(valid_records))
+    forward_range = range(current_index + 1, len(all_record_files))
     backward_range = range(0, current_index)
     search_indices = list(forward_range) + list(backward_range)
 
@@ -158,7 +159,7 @@ def find_negative_candidates_pool(current_index, target_class, current_filing_da
             print(f"    [Neg Pool Search] Reached target pool size ({target_pool_size}). Search halted.")
             break
 
-        next_record_info = valid_records[i]
+        next_record_info = all_record_files[i]
         next_rec_num = next_record_info["rec_num"]; next_app_num = next_record_info["app_num"]
 
         if next_app_num == current_app_num or next_app_num in processed_app_ids: continue
@@ -222,16 +223,14 @@ def find_negative_candidates_pool(current_index, target_class, current_filing_da
     return list(negative_pool), neg_id_to_source_record_data
 
 
-def create_par4pc_data(record_dir: Path, ctnf_dir: Path, validation_dir: Path, output_dir: Path, error_dir: Path, output_file_jsonl: Path, output_file_parquet: Path):
+def create_par4pc_data(record_dir: Path, ctnf_dir: Path, output_dir: Path, error_dir: Path, output_file_jsonl: Path, output_file_parquet: Path):
     try:
         print(f"Record directory path: {record_dir}")
         if not record_dir.is_dir(): print(f"Error: Record directory not found: {record_dir}"); return
         if not ctnf_dir.is_dir(): print(f"Error: CTNF directory not found: {ctnf_dir}"); return
-        if not validation_dir.is_dir(): print(f"Error: Validation directory not found: {validation_dir}"); return
 
     except NameError:
         print("Error: Unable to check paths (NameError). This should ideally not happen with direct path parameters.");
-        
         return
 
     output_dir.mkdir(parents=True, exist_ok=True); error_dir.mkdir(parents=True, exist_ok=True)
@@ -249,23 +248,33 @@ def create_par4pc_data(record_dir: Path, ctnf_dir: Path, validation_dir: Path, o
              with open(error_log_path, 'a', newline="", encoding="utf-8") as f: csv.DictWriter(f, fieldnames=log_fieldnames).writerow({"rec_num": rec_num, "app_num": app_num, "claim_num": claim_num if claim_num else "N/A", "error_code": code, "error_message": msg, "details": details_str})
          except Exception as log_e: print(f"Error: Log recording failed: {log_e}")
 
-    validation_result_path = validation_dir / "validation_result.csv"; valid_records = []
-    if not validation_result_path.exists(): print(f"Error: Validation file not found ({validation_result_path})"); log_status("N/A","N/A",None,404,"Validation file not found",str(validation_result_path)); return
-    try:
-        with open(validation_result_path, 'r', newline="", encoding="utf-8") as f:
-            for row in csv.DictReader(f):
-                if row.get("valid_b", "").lower() == "true":
-                    try: valid_records.append({"rec_num": int(row["rec_num"]), "app_num": row["app_num"]})
-                    except (ValueError, TypeError): log_status(row.get('rec_num'), row.get('app_num'), None, 305, "Invalid rec_num in validation file"); continue
-    except Exception as e: print(f"Error: Failed to read validation file: {e}"); log_status("N/A","N/A",None,503,"Failed to read validation file",str(e)); return
-    if not valid_records: print("No valid records to process."); return
-    print(f"Number of valid records: {len(valid_records)}"); valid_records.sort(key=lambda x: x["rec_num"])
+    # 모든 레코드 파일을 찾아서 유효한 것으로 처리
+    record_files = sorted(list(record_dir.glob("rec_*.json")))
+    if not record_files: 
+        print("Error: No record files found."); 
+        log_status("N/A","N/A",None,404,"No record files found", str(record_dir)); 
+        return
+    
+    all_records = []
+    for record_file in record_files:
+        match = re.search(r'rec_(r\d+)_(\d+)', record_file.name)
+        if match:
+            rec_num = int(match.group(1)[1:])  # 'r123' -> 123
+            app_num = match.group(2)
+            all_records.append({"rec_num": rec_num, "app_num": app_num})
+    
+    if not all_records: 
+        print("Error: No valid record file names found."); 
+        return
+    
+    print(f"Number of record files: {len(all_records)}"); 
+    all_records.sort(key=lambda x: x["rec_num"])
     
     all_par4pc_data = []
     par4pc_count = 0; num_options = 8; negative_pool_target_size = 100 
     min_negatives = 3; max_gold_silver = num_options - min_negatives
 
-    for idx, record_info in enumerate(valid_records):
+    for idx, record_info in enumerate(all_records):
         rec_num = record_info["rec_num"]; app_num = record_info["app_num"]
         print(f"\n--- Processing started: Record r{rec_num:05d} (App: {app_num}) ---")
         try:
@@ -340,7 +349,7 @@ def create_par4pc_data(record_dir: Path, ctnf_dir: Path, validation_dir: Path, o
                 all_app_citations_to_exclude = set(unique_examiner_cited_ids) | all_gold_ids_app | all_silver_ids_app_pool
                 negative_candidates_pool_ids, neg_id_sources_map = find_negative_candidates_pool(
                     idx, target_class, current_filing_date,
-                    valid_records, record_dir, ctnf_dir, all_app_citations_to_exclude, 
+                    all_records, record_dir, ctnf_dir, all_app_citations_to_exclude, 
                     target_pool_size=negative_pool_target_size
                 )
             elif not target_class: log_status(rec_num, app_num, None, 306, "Target class not found"); print("  Warning: No target class found")
@@ -497,20 +506,15 @@ if __name__ == "__main__":
         sys.exit(1)
   
     record_input_dir = base_data_dir / "record"
-    ctnf_input_dir = base_data_dir / "parsed_CTNF"
-    validation_input_dir = base_data_dir / "validation"
-    
+    ctnf_input_dir = base_data_dir / "parsed_CTNF_with_PN"
     individual_json_output_dir = base_data_dir / "par4pc" 
     error_report_dir = base_data_dir / "error_report"
-
-    
-    output_jsonl_file = base_data_dir / "par4pc_benchmark.jsonl"
-    output_parquet_file = base_data_dir / "par4pc_benchmark.parquet"
+    output_jsonl_file = base_data_dir / "par4pc" / "par4pc_benchmark.jsonl"
+    output_parquet_file = base_data_dir / "par4pc" / "par4pc_benchmark.parquet"
   
     create_par4pc_data(
         record_dir=record_input_dir,
         ctnf_dir=ctnf_input_dir,
-        validation_dir=validation_input_dir,
         output_dir=individual_json_output_dir,
         error_dir=error_report_dir,
         output_file_jsonl=output_jsonl_file,
