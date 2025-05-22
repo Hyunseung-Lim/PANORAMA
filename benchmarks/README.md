@@ -26,11 +26,23 @@ The PANORAMA dataset captures the end-to-end examination workflow and the underl
 
 ## Using the Benchmarks
 
-Each benchmark directory contains:
+Each benchmark directory contains the following structure:
 
-- Evaluation scripts
-- Sample data (where applicable)
-- Detailed README with specific instructions
+```
+benchmarks/
+├── par4pc/
+│   ├── data/           # Sample data for testing
+│   ├── inference.py    # Scripts for generating inference results
+│   └── evaluation.py   # Scripts for evaluating the inference results
+├── pi4pc/
+│   ├── data/           # Sample data for testing
+│   ├── inference.py    # Scripts for generating inference results
+│   └── evaluation.py   # Scripts for evaluating the inference results
+└── noc4pc/
+    ├── data/           # Sample data for testing
+    ├── inference.py    # Scripts for generating inference results
+    └── evaluation.py   # Scripts for evaluating the inference results
+```
 
 ### Data Format
 
@@ -40,24 +52,67 @@ The benchmark tasks use data from the PANORAMA dataset available on Hugging Face
 - [DxD-Lab/PANORAMA-PAR4PC-Bench](https://huggingface.co/datasets/DxD-Lab/PANORAMA-PAR4PC-Bench)
 - [DxD-Lab/PANORAMA-PI4PC-Bench](https://huggingface.co/datasets/DxD-Lab/PANORAMA-PI4PC-Bench)
 
-### Common Evaluation Commands
+### Inference and Evaluation Process
 
-#### NOC4PC Evaluation:
+For all benchmarks, the general process is:
+
+1. Run the inference script to generate predictions
+2. Run the evaluation script to evaluate the predictions against the ground truth
+
+### Benchmark-Specific Commands
+
+#### PAR4PC:
+
+**Inference:**
+
+```bash
+python benchmarks/par4pc/inference.py --provider [provider] --model [model] --prompt_mode [mode]
+```
+
+**Evaluation:**
+
+```bash
+python benchmarks/par4pc/evaluation.py <path_to_inference_results.csv>
+```
+
+#### PI4PC:
+
+**Inference:**
+
+```bash
+python benchmarks/pi4pc/inference.py --provider [provider] --model [model] --prompt_mode [mode]
+```
+
+**Evaluation:**
+
+```bash
+python benchmarks/pi4pc/evaluation.py <path_to_inference_results.csv>
+```
+
+#### NOC4PC:
+
+**Inference:**
 
 ```bash
 python benchmarks/noc4pc/inference.py --provider [provider] --model [model] --prompt_mode [mode]
 ```
 
-#### PAR4PC Evaluation:
+**Evaluation:**
 
 ```bash
-# See specific benchmark directory for detailed parameters
-python benchmarks/par4pc/evaluation.py
+python benchmarks/noc4pc/evaluation.py <path_to_inference_results.csv>
 ```
 
-#### PI4PC Evaluation:
+### Dependencies
+
+All benchmarks require the dependencies specified in the project's `requirements.txt` file. Additionally, the NOC4PC benchmark requires the BLEURT library for evaluation:
 
 ```bash
-# See specific benchmark directory for detailed parameters
-python benchmarks/pi4pc/evaluation.py
+# Install BLEURT from GitHub
+pip install git+https://github.com/google-research/bleurt.git
+
+# If you encounter issues, you may need to clone and install manually:
+git clone https://github.com/google-research/bleurt.git
+cd bleurt
+pip install .
 ```

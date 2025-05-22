@@ -1,6 +1,6 @@
 # PANORAMA: A Dataset and Benchmark Tasks Capturing the Evaluation Trails and Rationales in Patent Examination
 
-PANORAMA is a dataset of 8,143 U.S. patent examination records designed to capture the complete patent examination process. It includes original patent applications, cited prior art references, rejection documents, and approval notices along with examiners' detailed rationales. From this dataset, we've developed three benchmark tasks that test different aspects of the patent examination workflow: Prior Art Retrieval for Patent Claims (PAR4PC), Patentability Identification for Patent Claims (PI4PC), and Novelty and Obviousness Characterization for Patent Claims (NOC4PC).
+PANORAMA is a dataset of U.S. patent examination records designed to capture the complete patent examination process. It includes original patent applications, cited prior art references, rejection documents, and approval notices along with examiners' detailed rationales. From this dataset, we've developed three benchmark tasks that test different aspects of the patent examination workflow: Prior Art Retrieval for Patent Claims (PAR4PC), Patentability Identification for Patent Claims (PI4PC), and Novelty and Obviousness Characterization for Patent Claims (NOC4PC).
 
 ## 🛠️ Setup
 
@@ -92,8 +92,4 @@ python convert2bench_pi4pc.py --base_data_dir [path/to/data]
 
 ## 📜 License
 
-This project is licensed under the [Specify License Here - e.g., MIT License, Apache 2.0].
-
-## 📞 Contact
-
-For any questions or inquiries about PANORAMA, please contact [Your Name/Lab Name] at [your_email@example.com] or open an issue on this GitHub repository.
+This project is licensed under the CC-BY-NC-4.0.
