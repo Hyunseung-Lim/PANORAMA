@@ -591,7 +591,7 @@ if __name__ == "__main__":
 
     output_jsonl_file = base_data_dir / "pi4pc_benchmark.jsonl"
     output_parquet_file = base_data_dir / "pi4pc_benchmark.parquet"
-  
+
     create_cited_paragraph_pi4pc(
         paragraph_dir=paragraph_input_dir,
         spec_dir=spec_input_dir,

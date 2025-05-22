@@ -1,11 +1,8 @@
-# test_rejection/test.py
-# python test_rejection/test.py --provider openai --model gpt-4o --benchmark_file data/benchmark_rejection_splited/test.parquet
-# python test_rejection/test.py --provider openai --model gpt-4o --benchmark_file data/benchmark_rejection_splited/test.jsonl
-# python test_rejection/test.py --provider google --model gemini-1.5-flash-latest --benchmark_file data/benchmark_rejection_splited/test.parquet --prompt_mode zero-shot
+# example(zero-shot): python benchmarks/noc4pc/inference.py --provider google --model gemini-1.5-flash-latest --prompt_mode zero-shot
+# example(cot): python benchmarks/noc4pc/inference.py --provider openai --model gpt-4o --prompt_mode cot
 
-# baseline
-# python test_rejection/test.py --benchmark_file data/benchmark_rejection_splited/test.parquet --baseline-1
-# python test_rejection/test.py --benchmark_file data/benchmark_rejection_splited/test.parquet --baseline-2
+# example(baseline): python benchmarks/noc4pc/inference.py --baseline-1
+# example(baseline-2): python benchmarks/noc4pc/inference.py --baseline-2
 
 import json
 import os
@@ -25,6 +22,7 @@ import random
 import numpy as np
 from sklearn.metrics import f1_score, precision_recall_fscore_support
 from pydantic import BaseModel, Field
+from datasets import load_dataset
 
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
@@ -34,6 +32,8 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 load_dotenv()
 
 warnings.filterwarnings(action='ignore')
+
+DATASET_NAME = "DxD-Lab/PANORAMA-NOC4PC-Bench"
 
 class ZeroShotRejectionAnswer(BaseModel):
     code: Literal["ALLOW", "102", "103"] = Field(description="The rejection code (ALLOW, 102, or 103).")
@@ -353,62 +353,40 @@ def evaluate_rejection_prediction(predicted_code: str | None, gold_code: str | N
         return False
     return predicted_code.upper() == gold_code.upper()
 
-def run_baseline_1_evaluation(benchmark_file: str, baseline_1_runs: int = 20):
+def run_baseline_1_evaluation(baseline_1_runs: int = 20):
     """
     baseline 1: random selection (among 102, 103, ALLOW)
     calculate average performance by running multiple times
     """
     print(f"Starting Baseline 1 (Random Selection) evaluation with {baseline_1_runs} runs")
-    print(f"Loading benchmark data from file: {benchmark_file}")
+    print(f"Loading benchmark data from Hugging Face dataset {DATASET_NAME} (test split)")
 
-    bench_path = Path(benchmark_file)
-    if not bench_path.is_file():
-        print(f"Error: Benchmark file not found: {benchmark_file}")
-        return
-
-    benchmark_data_list = []
-    total_items = 0
-    if benchmark_file.lower().endswith('.jsonl'):
-        try:
-            with open(bench_path, 'r', encoding='utf-8') as f:
-                for line in f:
-                    try:
-                        benchmark_data_list.append(json.loads(line))
-                    except json.JSONDecodeError as e_json:
-                        print(f"Warning: Skipping invalid JSON line in {bench_path.name}: {e_json}")
-            total_items = len(benchmark_data_list)
-            print(f"Loaded {total_items} items from JSONL file.")
-        except Exception as e:
-            print(f"Error reading JSONL file {bench_path}: {e}")
-            print(traceback.format_exc())
-            return
-    elif benchmark_file.lower().endswith('.parquet'):
-        try:
-            df = pd.read_parquet(bench_path)
-            total_items = len(df)
-            benchmark_data_list = df.to_dict('records')
-            print(f"Loaded {total_items} items from Parquet file.")
-        except Exception as e:
-            print(f"Error reading Parquet file {bench_path}: {e}")
-            print(traceback.format_exc())
-            return
-    else:
-        print(f"Error: Unsupported file format: {benchmark_file}. Please use .jsonl or .parquet")
+    try:
+        ds = load_dataset(DATASET_NAME, split="test")
+        df = ds.to_pandas()
+        benchmark_data_list = df.to_dict("records")
+        total_items = len(benchmark_data_list)
+        print(f"Loaded {total_items} items from Hugging Face dataset.")
+    except Exception as e:
+        print(f"Error loading dataset from Hugging Face: {e}")
+        print(traceback.format_exc())
         return
 
     if not benchmark_data_list:
-        print(f"Error: No data loaded from {benchmark_file}")
+        print(f"Error: No data loaded from dataset")
         return
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    input_filename_stem = bench_path.stem
-    result_dir = Path(f'./test_rejection/result/result_{timestamp}_baseline1_{input_filename_stem}')
+    dataset_name_for_path = DATASET_NAME.replace("/", "_")
+    result_dir = Path(__file__).parent / 'result'
     result_dir.mkdir(parents=True, exist_ok=True)
+    results_dir = result_dir / f"result_{timestamp}_baseline1_{dataset_name_for_path}"
+    results_dir.mkdir(parents=True, exist_ok=True)
     
-    runs_dir = result_dir / "runs"
+    runs_dir = results_dir / "runs"
     runs_dir.mkdir(exist_ok=True)
     
-    stats_file = result_dir / "baseline1_stats.csv"
+    stats_file = results_dir / "baseline1_stats.csv"
     
 
     f1_macro_scores = []
@@ -552,57 +530,35 @@ def run_baseline_1_evaluation(benchmark_file: str, baseline_1_runs: int = 20):
     
     print(f"\nAll individual run results saved in directory: {runs_dir}")
 
-def run_baseline_2_evaluation(benchmark_file: str):
+def run_baseline_2_evaluation():
     """
     baseline 2: always the same selection (102, 103, ALLOW)
     compare performance for each option
     """
     print(f"Starting Baseline 2 (Fixed Selection) evaluation")
-    print(f"Loading benchmark data from file: {benchmark_file}")
+    print(f"Loading benchmark data from Hugging Face dataset {DATASET_NAME} (test split)")
 
-    bench_path = Path(benchmark_file)
-    if not bench_path.is_file():
-        print(f"Error: Benchmark file not found: {benchmark_file}")
-        return
-
-    benchmark_data_list = []
-    total_items = 0
-    if benchmark_file.lower().endswith('.jsonl'):
-        try:
-            with open(bench_path, 'r', encoding='utf-8') as f:
-                for line in f:
-                    try:
-                        benchmark_data_list.append(json.loads(line))
-                    except json.JSONDecodeError as e_json:
-                        print(f"Warning: Skipping invalid JSON line in {bench_path.name}: {e_json}")
-            total_items = len(benchmark_data_list)
-            print(f"Loaded {total_items} items from JSONL file.")
-        except Exception as e:
-            print(f"Error reading JSONL file {bench_path}: {e}")
-            print(traceback.format_exc())
-            return
-    elif benchmark_file.lower().endswith('.parquet'):
-        try:
-            df = pd.read_parquet(bench_path)
-            total_items = len(df)
-            benchmark_data_list = df.to_dict('records')
-            print(f"Loaded {total_items} items from Parquet file.")
-        except Exception as e:
-            print(f"Error reading Parquet file {bench_path}: {e}")
-            print(traceback.format_exc())
-            return
-    else:
-        print(f"Error: Unsupported file format: {benchmark_file}. Please use .jsonl or .parquet")
+    try:
+        ds = load_dataset(DATASET_NAME, split="test")
+        df = ds.to_pandas()
+        benchmark_data_list = df.to_dict("records")
+        total_items = len(benchmark_data_list)
+        print(f"Loaded {total_items} items from Hugging Face dataset.")
+    except Exception as e:
+        print(f"Error loading dataset from Hugging Face: {e}")
+        print(traceback.format_exc())
         return
 
     if not benchmark_data_list:
-        print(f"Error: No data loaded from {benchmark_file}")
+        print(f"Error: No data loaded from dataset")
         return
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    input_filename_stem = bench_path.stem
-    result_dir = Path(f'./test_rejection/result/result_{timestamp}_baseline2_{input_filename_stem}')
+    dataset_name_for_path = DATASET_NAME.replace("/", "_")
+    result_dir = Path(__file__).parent / 'result'
     result_dir.mkdir(parents=True, exist_ok=True)
+    results_dir = result_dir / f"result_{timestamp}_baseline2_{dataset_name_for_path}"
+    results_dir.mkdir(parents=True, exist_ok=True)
     
     fixed_codes = ["102", "103", "ALLOW"]
     results = {}
@@ -613,7 +569,7 @@ def run_baseline_2_evaluation(benchmark_file: str):
     label_map = {"102": 0, "103": 1, "ALLOW": 2}
 
     for fixed_code in fixed_codes:
-        result_file = result_dir / f"baseline2_{fixed_code}_results.csv"
+        result_file = results_dir / f"baseline2_{fixed_code}_results.csv"
         
         csv_header = ["identifier", "target_patent", "target_claim",
                     "gold_code", "predicted_code", "is_code_correct"]
@@ -723,7 +679,7 @@ def run_baseline_2_evaluation(benchmark_file: str):
         print(f"  Macro Precision: {best_precision:.4f}")
         print(f"  Macro Recall: {best_recall:.4f}")
         
-        summary_file = result_dir / "baseline2_summary.csv"
+        summary_file = results_dir / "baseline2_summary.csv"
         try:
             with open(summary_file, 'w', newline='', encoding='utf-8-sig') as csvfile:
                 writer = csv.writer(csvfile)
@@ -739,56 +695,35 @@ def run_baseline_2_evaluation(benchmark_file: str):
         except IOError as e:
             print(f"Error writing summary to CSV {summary_file}: {e}")
     
-    print(f"\nAll results saved in directory: {result_dir}")
+    print(f"\nAll results saved in directory: {results_dir}")
 
-def main(provider: str, model_name: str, benchmark_file: str, prompt_mode: str):
+def main(provider: str, model_name: str, prompt_mode: str):
     print(f"Starting Rejection benchmark test with {provider} - {model_name}")
-    print(f"Loading benchmark data from file: {benchmark_file}")
+    print(f"Loading benchmark data from Hugging Face dataset {DATASET_NAME} (test split)")
 
-    bench_path = Path(benchmark_file)
-    if not bench_path.is_file():
-        print(f"Error: Benchmark file not found: {benchmark_file}")
-        return
-
-    benchmark_data_list = []
-    total_items = 0
-    if benchmark_file.lower().endswith('.jsonl'):
-        try:
-            with open(bench_path, 'r', encoding='utf-8') as f:
-                for line in f:
-                    try:
-                        benchmark_data_list.append(json.loads(line))
-                    except json.JSONDecodeError as e_json:
-                         print(f"Warning: Skipping invalid JSON line in {bench_path.name}: {e_json}")
-            total_items = len(benchmark_data_list)
-            print(f"Loaded {total_items} items from JSONL file.")
-        except Exception as e:
-            print(f"Error reading JSONL file {bench_path}: {e}")
-            print(traceback.format_exc()); return
-    elif benchmark_file.lower().endswith('.parquet'):
-        try:
-            df = pd.read_parquet(bench_path)
-            total_items = len(df)
-            benchmark_data_list = df.to_dict('records')
-            print(f"Loaded {total_items} items from Parquet file.")
-        except Exception as e:
-            print(f"Error reading Parquet file {bench_path}: {e}")
-            print(traceback.format_exc()); return
-    else:
-        print(f"Error: Unsupported file format: {benchmark_file}. Please use .jsonl or .parquet")
+    try:
+        ds = load_dataset(DATASET_NAME, split="test")
+        df = ds.to_pandas()
+        benchmark_data_list = df.to_dict("records")
+        total_items = len(benchmark_data_list)
+        print(f"Loaded {total_items} items from Hugging Face dataset.")
+    except Exception as e:
+        print(f"Error loading dataset from Hugging Face: {e}")
+        print(traceback.format_exc())
         return
 
     if not benchmark_data_list:
-        print(f"Error: No data loaded from {benchmark_file}")
+        print(f"Error: No data loaded from dataset")
         return
 
-
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    input_filename_stem = bench_path.stem
-    result_dir = Path(f'./test_rejection/result/result_{timestamp}_{provider}_{model_name}_{prompt_mode}_{input_filename_stem}')
+    dataset_name_for_path = DATASET_NAME.replace("/", "_")
+    result_dir = Path(__file__).parent / 'result'
     result_dir.mkdir(parents=True, exist_ok=True)
-    results_file = result_dir / "evaluation_results.csv"
-    error_log_file = result_dir / "error_log.txt"
+    results_dir = result_dir / f"result_{timestamp}_{provider}_{model_name}_{prompt_mode}_{dataset_name_for_path}"
+    results_dir.mkdir(parents=True, exist_ok=True)
+    results_file = results_dir / "evaluation_results.csv"
+    error_log_file = results_dir / "error_log.txt"
 
     csv_header = ["identifier", "target_patent", "target_claim",
                   "gold_code", "predicted_code", "is_code_correct",
@@ -989,7 +924,7 @@ def main(provider: str, model_name: str, benchmark_file: str, prompt_mode: str):
     accuracy = (correct_code_predictions / valid_evaluated_items) * 100 if valid_evaluated_items > 0 else 0.0
     print(f"Code Prediction Accuracy (over successfully processed & evaluated items): {accuracy:.2f}% ({correct_code_predictions}/{valid_evaluated_items})")
 
-    print(f"\nDetailed results saved incrementally to: {results_file}")
+    print(f"\nDetailed results saved to: {results_file}")
     if errors > 0 and os.path.exists(error_log_file) and os.path.getsize(error_log_file) > 0:
          print(f"Error details logged to: {error_log_file}")
     elif errors > 0:
@@ -997,15 +932,12 @@ def main(provider: str, model_name: str, benchmark_file: str, prompt_mode: str):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Run rejection prediction benchmark test on a JSONL or Parquet file.')
+    parser = argparse.ArgumentParser(description='Run rejection prediction benchmark test using DxD-Lab/PANORAMA-NOC4PC-Bench dataset from Hugging Face.')
     parser.add_argument('--provider', type=str, required=False,
                        choices=['openai', 'anthropic', 'google'],
                        help='LLM provider (openai, anthropic, or google)')
     parser.add_argument('--model', type=str, required=False,
                        help='Model name (e.g., gpt-4o, claude-3-opus-20240229, gemini-1.5-flash-latest)')
-
-    parser.add_argument('--benchmark_file', type=str, required=True,
-                        help='Path to the benchmark JSONL or Parquet file (e.g., data/benchmark_rejection_splited/test.parquet)')
     parser.add_argument('--prompt_mode', type=str, default='zero-shot',
                         choices=['zero-shot', 'cot', 'cot_base'],
                         help="Prompt style: 'zero-shot' (default) or 'cot' (Chain-of-Thought)")
@@ -1020,23 +952,24 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.baseline_1:
-        run_baseline_1_evaluation(args.benchmark_file, args.baseline_1_runs)
+        run_baseline_1_evaluation(args.baseline_1_runs)
     elif args.baseline_2:
-        run_baseline_2_evaluation(args.benchmark_file)
+        run_baseline_2_evaluation()
     else:
         if not args.provider or not args.model:
             parser.error("--provider and --model are required when not using baseline modes")
         
-        if args.benchmark_file.lower().endswith('.parquet'):
-            try:
-                import pandas
-            except ImportError:
-                print("Error: 'pandas' library is required for reading Parquet files.", file=sys.stderr)
-                print("Please install it using: pip install pandas pyarrow")
-                sys.exit(1)
+        try:
+            import pandas
+            import pyarrow
+            import datasets
+        except ImportError:
+            print("Error: 'pandas', 'pyarrow', and 'datasets' libraries are required.")
+            print("Please install them using: pip install pandas pyarrow datasets")
+            sys.exit(1)
 
         try:
-            main(args.provider, args.model, args.benchmark_file, args.prompt_mode)
+            main(args.provider, args.model, args.prompt_mode)
         except Exception as e:
             print(f"\nCritical error in main execution: {str(e)}")
             print(traceback.format_exc())

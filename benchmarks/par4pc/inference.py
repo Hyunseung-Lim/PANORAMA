@@ -1,11 +1,7 @@
-# python .\test_citedPatent\test.py --provider openai --model gpt-4o --benchmark_file data\benchmark_cited_patent_splited\train_zeroshot.jsonl
-# python test_citedPatent/test.py --provider google --model gemini-2.5-flash-preview-04-17 --benchmark_file data/benchmark_cited_patent_splited/test.parquet --prompt_mode zero-shot
-# gemini-2.5-flash-preview-04-17
-
-# baseline
-# python test_citedPatent/test.py --benchmark_file data/benchmark_cited_patent_splited/test.parquet --baseline
-# python test_citedPatent/test.py --benchmark_file data/benchmark_cited_patent_splited/test.parquet --baseline --runs 10
-# python test_citedPatent/test.py --benchmark_file data/benchmark_cited_patent_splited/test.parquet --baseline-2 --runs 10
+# example(zero-shot): python benchmarks/par4pc/inference.py --provider openai --model gpt-4o --prompt_mode zero-shot
+# example(cot): python benchmarks/par4pc/inference.py --provider openai --model gpt-4o --prompt_mode cot
+# example(baseline): python benchmarks/par4pc/inference.py --baseline --runs 10
+# example(baseline-2): python benchmarks/par4pc/inference.py --baseline-2 --runs 10
 
 import json
 import os
@@ -23,6 +19,7 @@ import warnings
 import csv
 import random
 from pydantic import BaseModel, Field
+from datasets import load_dataset
 
 
 from langchain_openai import ChatOpenAI
@@ -405,32 +402,30 @@ def evaluate_and_log_3x2_matrix(gold_answers: List[str], silver_answers: List[st
     result_row_dict["negative_negative"]= matrix["negative_negative"]
 
 
+DATASET_NAME = "DxD-Lab/PANORAMA-PAR4PC-Bench"
 
-def main(provider: str, model_name: str, benchmark_file: str, prompt_mode: str):
-    print(f"Starting benchmark test with {provider} - {model_name}")
-    print(f"Loading par4pcs from Parquet file: {benchmark_file}")
-
-    par4pc_path = Path(benchmark_file)
-    if not par4pc_path.is_file():
-        print(f"Error: Benchmark Parquet file not found: {benchmark_file}")
-        return
-
+def main(provider: str, model_name: str, prompt_mode: str):
+    print(f"Starting benchmark test with {provider} - {model_name} using Hugging Face dataset {DATASET_NAME} (test split)")
+    
     try:
-        df = pd.read_parquet(par4pc_path)
+        ds = load_dataset(DATASET_NAME, split="test")
+        df = ds.to_pandas()
         total_par4pcs = len(df)
-        print(f"Loaded {total_par4pcs} par4pcs from the Parquet file.")
+        print(f"Loaded {total_par4pcs} par4pcs from Hugging Face dataset {DATASET_NAME} (test split).")
     except Exception as e:
-        print(f"Error reading Parquet file {par4pc_path}: {e}")
+        print(f"Error loading dataset from Hugging Face {DATASET_NAME}: {e}")
         print(traceback.format_exc())
         return
 
     if df.empty:
-        print(f"Error: No data found in the Parquet file: {benchmark_file}")
+        print(f"Error: No data found in the dataset.")
         return
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    input_filename_stem = par4pc_path.stem
-    result_dir = Path(f'./test_citedPatent/result/result_{timestamp}_{provider}_{model_name}_{prompt_mode}_{input_filename_stem}')
+    dataset_name_for_path = DATASET_NAME.replace("/", "_")
+    result_dir_name = f'result_{timestamp}_{provider}_{model_name}_{prompt_mode}_{dataset_name_for_path}'
+        
+    result_dir = Path(__file__).parent / 'result' / result_dir_name
     result_dir.mkdir(parents=True, exist_ok=True)
     results_file = result_dir / "evaluation_results.csv"
     error_log_file = result_dir / "error_log.txt"
@@ -653,36 +648,34 @@ def main(provider: str, model_name: str, benchmark_file: str, prompt_mode: str):
          print(f"Processing errors occurred, check terminal output for details.")
 
 
-def run_baseline_evaluation(benchmark_file: str, runs: int = 1):
+def run_baseline_evaluation(runs: int = 1):
     """
     Baseline: Randomly select 1+ options (A-H)
     runs: number of repetitions to compute statistics
     """
-    print(f"Starting Baseline evaluation (random selection of 1+ options)")
+    print(f"Starting Baseline evaluation with Hugging Face dataset {DATASET_NAME} (test split)")
     print(f"Running {runs} times to compute statistics")
-    print(f"Loading benchmark data from file: {benchmark_file}")
-
-    par4pc_path = Path(benchmark_file)
-    if not par4pc_path.is_file():
-        print(f"Error: Benchmark file not found: {benchmark_file}")
-        return
 
     try:
-        df = pd.read_parquet(par4pc_path)
+        ds = load_dataset(DATASET_NAME, split="test")
+        df = ds.to_pandas()
         total_par4pcs = len(df)
-        print(f"Loaded {total_par4pcs} par4pcs from the Parquet file.")
+        print(f"Loaded {total_par4pcs} par4pcs from Hugging Face dataset {DATASET_NAME} (test split).")
     except Exception as e:
-        print(f"Error reading Parquet file {par4pc_path}: {e}")
+        print(f"Error loading dataset from Hugging Face {DATASET_NAME}: {e}")
         print(traceback.format_exc())
         return
+    
+    dataset_name_for_path = DATASET_NAME.replace("/", "_")
 
     if df.empty:
-        print(f"Error: No data found in the Parquet file: {benchmark_file}")
+        print(f"Error: No data found in the dataset.")
         return
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    input_filename_stem = par4pc_path.stem
-    result_dir = Path(f'./test_citedPatent/result/result_{timestamp}_baseline_runs{runs}_{input_filename_stem}')
+    
+    result_dir_name = f'result_{timestamp}_baseline_runs{runs}_{dataset_name_for_path}'
+    result_dir = Path(__file__).parent / 'result' / result_dir_name
     result_dir.mkdir(parents=True, exist_ok=True)
     
     runs_dir = result_dir / "individual_runs"
@@ -907,36 +900,33 @@ def run_baseline_evaluation(benchmark_file: str, runs: int = 1):
         print(f"Individual run results stored in: {runs_dir}")
 
 
-def run_baseline_2_evaluation(benchmark_file: str, runs: int = 1):
+def run_baseline_2_evaluation(runs: int = 1):
     """
     Baseline 2: Randomly select exactly 1 option from A-H
     runs: number of repetitions to compute statistics
     """
-    print(f"Starting Baseline 2 evaluation (random selection of exactly 1 option)")
+    print(f"Starting Baseline 2 evaluation with Hugging Face dataset {DATASET_NAME} (test split)")
     print(f"Running {runs} times to compute statistics")
-    print(f"Loading benchmark data from file: {benchmark_file}")
-
-    par4pc_path = Path(benchmark_file)
-    if not par4pc_path.is_file():
-        print(f"Error: Benchmark file not found: {benchmark_file}")
-        return
 
     try:
-        df = pd.read_parquet(par4pc_path)
+        ds = load_dataset(DATASET_NAME, split="test")
+        df = ds.to_pandas()
         total_par4pcs = len(df)
-        print(f"Loaded {total_par4pcs} par4pcs from the Parquet file.")
+        print(f"Loaded {total_par4pcs} par4pcs from Hugging Face dataset {DATASET_NAME} (test split).")
     except Exception as e:
-        print(f"Error reading Parquet file {par4pc_path}: {e}")
+        print(f"Error loading dataset from Hugging Face {DATASET_NAME}: {e}")
         print(traceback.format_exc())
         return
+    
+    dataset_name_for_path = DATASET_NAME.replace("/", "_")
 
     if df.empty:
-        print(f"Error: No data found in the Parquet file: {benchmark_file}")
+        print(f"Error: No data found in the dataset.")
         return
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    input_filename_stem = par4pc_path.stem
-    result_dir = Path(f'./test_citedPatent/result/result_{timestamp}_baseline2_runs{runs}_{input_filename_stem}')
+    result_dir_name = f'result_{timestamp}_baseline2_runs{runs}_{dataset_name_for_path}'
+    result_dir = Path(__file__).parent / 'result' / result_dir_name
     result_dir.mkdir(parents=True, exist_ok=True)
     
     runs_dir = result_dir / "individual_runs"
@@ -1161,14 +1151,12 @@ def run_baseline_2_evaluation(benchmark_file: str, runs: int = 1):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Run cited patent prediction benchmark test on a Parquet file.')
+    parser = argparse.ArgumentParser(description='Run cited patent prediction benchmark test using DxD-Lab/PANORAMA-PAR4PC-Bench dataset from Hugging Face.')
     parser.add_argument('--provider', type=str, required=False,
                        choices=['openai', 'anthropic', 'google'],
                        help='LLM provider (openai, anthropic, or google). Required if not using baseline mode.')
     parser.add_argument('--model', type=str, required=False,
                        help='Model name (e.g., gpt-4o, claude-3-opus-20240229, gemini-2.0-flash). Required if not using baseline mode.')
-    parser.add_argument('--benchmark_file', type=str, required=True,
-                        help='Path to the benchmark Parquet file (e.g., data/benchmark_cited_patent_splited/test.parquet)')
     parser.add_argument('--prompt_mode', type=str, default='zero-shot',
                     choices=['zero-shot', 'cot', 'cot_base'],
                     help="Prompt style: 'zero-shot' (default) or 'cot'")
@@ -1183,14 +1171,14 @@ if __name__ == "__main__":
 
     try:
         if args.baseline:
-            run_baseline_evaluation(args.benchmark_file, args.runs)
+            run_baseline_evaluation(args.runs)
         elif args.baseline_2:
-            run_baseline_2_evaluation(args.benchmark_file, args.runs)
+            run_baseline_2_evaluation(args.runs)
         else:
             if not args.provider or not args.model:
-                parser.error("--provider and --model are required when not using baseline mode")
+                parser.error("--provider and --model are required when not using baseline mode.")
+            main(args.provider, args.model, args.prompt_mode)
             
-            main(args.provider, args.model, args.benchmark_file, args.prompt_mode)
     except Exception as e:
         print(f"Critical error in main execution: {str(e)}")
         print(traceback.format_exc())
